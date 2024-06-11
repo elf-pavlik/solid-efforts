@@ -11,6 +11,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/solid-efforts/',
   plugins: [
     VueRouter(),
     Vue({
@@ -28,7 +29,7 @@ export default defineConfig({
       google: {
         families: [ {
           name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
+          styles: 'wght@100;300;400;500;700;1200',
         }],
       },
     }),

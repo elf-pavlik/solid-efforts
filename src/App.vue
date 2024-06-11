@@ -9,3 +9,9 @@
 <script lang="ts" setup>
   //
 </script>
+
+<style>
+  h4, .v-table {
+    margin-top: 2rem;
+  }
+</style>

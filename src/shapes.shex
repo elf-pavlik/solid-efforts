@@ -1,0 +1,36 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX solidshapes: <http://localhost:3000/shapetrees/shapes/>
+PREFIX ex: <https://vocab.example/>
+
+solidshapes:Person {
+  a [ schema:Person ] ;
+  schema:name xsd:string ;
+  schema:image IRI ;
+}
+
+solidshapes:Draft {
+  a [ ex:Draft ] ;
+  schema:name xsd:string ;
+  schema:editor @solidshapes:Person * ;
+  schema:author @solidshapes:Person * ;
+  ex:specifies @solidshapes:ProductClass * ;
+  ex:explains @solidshapes:Draft ? ;
+}
+
+solidshapes:ProductClass {
+  a [ ex:ProductClass ] ;
+  schema:name xsd:string ;
+}
+
+solidshapes:Implementation {
+  a [ ex:Implementation ] ;
+  schema:name xsd:string ;
+  ex:programmingLanguage IRI ;
+  ex:framework IRI ?;
+  ex:maintainer @solidshapes:Person * ;
+  ex:contributor @solidshapes:Person * ;
+  ex:implements @solidshapes:ProductClass * ;
+  ex:dependency @solidshapes:Implementation * ;
+}
