@@ -5,7 +5,7 @@ export const context = {
   schema: 'http://schema.org/',
   wikidata: 'http://www.wikidata.org/entity/',
   ex: 'https://vocab.example/',
-  data: 'https://data.example',
+  data: 'https://data.example/',
   name: {
     '@id': 'schema:name',
     '@type': 'xsd:string'
@@ -21,6 +21,7 @@ export const context = {
   Implementation: 'ex:Implementation',
   Application: 'ex:Application',
   ProductClass: 'ex:ProductClass',
+  Scope: 'ex:Scope',
   Module: 'ex:Module',
   Service: 'ex:Service',
   editor: {
@@ -49,6 +50,10 @@ export const context = {
   },
   implements: {
     '@id': 'ex:implements',
+    '@type': '@id'
+  },
+  accesses: {
+    '@id': 'ex:accesses',
     '@type': '@id'
   },
   dependency: {

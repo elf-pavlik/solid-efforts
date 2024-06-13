@@ -2,8 +2,8 @@ import { useRouter } from "vue-router";
 import { LdoBase, LdoDataset } from "@ldo/ldo";
 import { createLdoDataset } from '@ldo/ldo';
 import { parseJsonld } from '@janeirodigital/interop-utils';
-import { DraftShapeType, ImplementationShapeType, PersonShapeType, ProductClassShapeType } from '@/ldo/shapes.shapeTypes'
-import type { Draft, Implementation, Person, ProductClass } from '@/ldo/shapes.typings';
+import { DraftShapeType, ImplementationShapeType, PersonShapeType, ProductClassShapeType, ScopeShapeType } from '@/ldo/shapes.shapeTypes'
+import type { Draft, Implementation, Person, ProductClass, Scope } from '@/ldo/shapes.typings';
 import { data } from '@/data/index'
 
 export type IRI = { '@id': string }
@@ -26,6 +26,7 @@ export function useLdo() {
       Specification: 'https://vocab.example/Specification',
       Draft: 'https://vocab.example/Draft',
       ProductClass: 'https://vocab.example/ProductClass',
+      Scope: 'https://vocab.example/Scope',
       Implementation: 'https://vocab.example/Implementation',
       Application: 'https://vocab.example/Application',
       Module: 'https://vocab.example/Module',
@@ -35,11 +36,19 @@ export function useLdo() {
       specifies: 'https://vocab.example/specifies',
       explains: 'https://vocab.example/explains',
       implements: 'https://vocab.example/implements',
+      accesses: 'https://vocab.example/accesses',
       dependency: 'https://vocab.example/dependency',
     },
     wikidata: {
       typescript: 'http://www.wikidata.org/entity/Q978185',
       java: 'http://www.wikidata.org/entity/Q251',
+    },
+    data: {
+      Contacts: 'https://data.example/Contacts',
+      Calendars: 'https://data.example/Calendars',
+      Tasks: 'https://data.example/Tasks',
+      Images: 'https://data.example/Images',
+      Videos: 'https://data.example/Videos',
     }
   }
 
@@ -79,6 +88,18 @@ export function useLdo() {
     return dataset
       .usingType(ProductClassShapeType)
       .matchSubject(ns.rdf.type, ns.ex.ProductClass)
+  }
+
+  function getScopes(): Scope[] {
+    return dataset
+      .usingType(ScopeShapeType)
+      .matchSubject(ns.rdf.type, ns.ex.Scope)
+  }
+
+  function getScope(id: string): Scope {
+    return dataset
+      .usingType(ScopeShapeType)
+      .fromSubject(id)
   }
 
   function getProduct(id: string): ProductClass {
@@ -193,6 +214,12 @@ export function useLdo() {
       .matchSubject(ns.ex.dependency, id)
   }
 
+  function getApplicationsForScope(id: string): Implementation[] {
+    return dataset
+      .usingType(ImplementationShapeType)
+      .matchSubject(ns.ex.accesses, id)
+  }
+
   function draftIcon (draft: Draft) {
     // @ts-expect-error
     if (draft.type.find((t: IRI) => t['@id'] === ns.ex.Primer)) {
@@ -223,6 +250,24 @@ export function useLdo() {
         return 'mdi-vuejs'
       default:
         return 'mdi-cellphone'
+
+    }
+  }
+
+  function scopeIcon(scope: Scope) {
+    switch (scope["@id"]) {
+      case ns.data.Calendars:
+        return 'mdi-calendar-blank'
+      case ns.data.Contacts:
+        return 'mdi-account-box-outline'
+      case ns.data.Tasks:
+        return 'mdi-sticker-check-outline'
+      case ns.data.Images:
+        return 'mdi-image-outline'
+      case ns.data.Videos:
+        return 'mdi-video-outline'
+      default:
+        return 'mdi-flask-empty-outline'
 
     }
   }
@@ -285,6 +330,9 @@ export function useLdo() {
     if (entity.type['@id'] === 'ProductClass' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'ProductClass')) {
       name = 'product'
     }
+    if (entity.type['@id'] === 'Scope' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Scope')) {
+      name = 'scope'
+    }
     router.push({ name, query: { id: entity['@id'] } })
   }
 
@@ -296,6 +344,8 @@ export function useLdo() {
     getApplications,
     getDraft,
     getProductClasses,
+    getScopes,
+    getScope,
     getProduct,
     getModules,
     getServices,
@@ -310,9 +360,11 @@ export function useLdo() {
     getNonModulesForProduct,
     getModulesForProduct,
     getApplicationsForModule,
+    getApplicationsForScope,
     draftIcon,
     implementationIcon,
     applicationIcon,
+    scopeIcon,
     implementationTypeIcon,
     isEditor,
     isAuthor,

@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ApplicationTable: typeof import('./src/components/ApplicationTable.vue')['default']
+    AppListItem: typeof import('./src/components/AppListItem.vue')['default']
     DraftListItem: typeof import('./src/components/DraftListItem.vue')['default']
     DraftTable: typeof import('./src/components/DraftTable.vue')['default']
     ImplementationTable: typeof import('./src/components/ImplementationTable.vue')['default']
@@ -16,5 +18,6 @@ declare module 'vue' {
     ProductImplementationsTable: typeof import('./src/components/ProductImplementationsTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScopesTable: typeof import('./src/components/ScopesTable.vue')['default']
   }
 }

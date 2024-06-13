@@ -33,4 +33,11 @@ solidshapes:Implementation {
   ex:contributor @solidshapes:Person * ;
   ex:implements @solidshapes:ProductClass * ;
   ex:dependency @solidshapes:Implementation * ;
+  ex:implements @solidshapes:ProductClass * ;
+  ex:accesses @solidshapes:Scope * ;
 }
+
+solidshapes:Scope {
+  a [ ex:Scope ] ;
+  schema:name xsd:string ;
+} 

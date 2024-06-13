@@ -23,5 +23,6 @@ declare module 'vue-router/auto-routes' {
     '/Implementation': RouteRecordInfo<'/Implementation', '/Implementation', Record<never, never>, Record<never, never>>,
     '/Person': RouteRecordInfo<'/Person', '/Person', Record<never, never>, Record<never, never>>,
     '/Product': RouteRecordInfo<'/Product', '/Product', Record<never, never>, Record<never, never>>,
+    '/Scope': RouteRecordInfo<'/Scope', '/Scope', Record<never, never>, Record<never, never>>,
   }
 }

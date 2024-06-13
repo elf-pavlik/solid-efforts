@@ -11,13 +11,15 @@ import Person from '@/pages/Person.vue'
 import Draft from '@/pages/Draft.vue'
 import Implementation from '@/pages/Implementation.vue'
 import Product from '@/pages/Product.vue'
+import Scope from '@/pages/Scope.vue'
 
 const routes = [
-  { path: '/', name: 'home', component: Home},
-  { path: '/person', name: 'person', component: Person},
-  { path: '/draft', name: 'draft', component: Draft},
-  { path: '/implementation', name: 'implementation', component: Implementation},
-  { path: '/product', name: 'product', component: Product},
+  { path: '/', name: 'home', component: Home },
+  { path: '/person', name: 'person', component: Person },
+  { path: '/draft', name: 'draft', component: Draft },
+  { path: '/implementation', name: 'implementation', component: Implementation },
+  { path: '/product', name: 'product', component: Product },
+  { path: '/scope', name: 'scope', component: Scope },
 ]
 
 const router = createRouter({

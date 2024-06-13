@@ -20,6 +20,10 @@ export const implementations = [
     implements: [
       'https://solidproject.org/TR/notifications-protocol#receiver',
       'https://solid.github.io/notifications/streaming-http-channel-2023#channel',
+    ],
+    accesses: [
+      'https://data.example/Tasks',
+      'https://data.example/Images',
     ]
   },
   {
@@ -38,6 +42,9 @@ export const implementations = [
       'https://www.npmjs.com/package/@ldo/solid',
       'https://www.npmjs.com/package/@janeirodigital/interop-application',
       'https://www.npmjs.com/package/@inrupt/solid-client-authn-core',
+    ],
+    accesses: [
+      'https://data.example/Calendars'
     ]
   },
   {
