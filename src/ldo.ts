@@ -42,6 +42,7 @@ export function useLdo() {
     wikidata: {
       typescript: 'http://www.wikidata.org/entity/Q978185',
       java: 'http://www.wikidata.org/entity/Q251',
+      rust: 'http://www.wikidata.org/entity/Q575650',
     },
     data: {
       Contacts: 'https://data.example/Contacts',
@@ -238,6 +239,8 @@ export function useLdo() {
         return 'mdi-language-typescript'
       case ns.wikidata.java:
         return 'mdi-language-java'
+      case ns.wikidata.rust:
+        return 'mdi-language-rust'
       default:
        return 'mdi-help-box-outline'
     }

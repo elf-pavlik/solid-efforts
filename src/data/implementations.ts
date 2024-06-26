@@ -118,6 +118,20 @@ export const implementations = [
     ]
   },
   {
+    id: 'https://github.com/janeirodigital/sai-java',
+    type: ['Module', 'Implementation'],
+    name: 'sai-java',
+    programmingLanguage: 'wikidata:Q251',
+    maintainer: [
+      'https://github.com/justinwb',
+    ],
+    contributor: [
+    ],
+    implements: [
+      'https://solid.github.io/data-interoperability-panel/specification/#application',
+    ]
+  },
+  {
     id: 'https://www.npmjs.com/package/@solid-notifications/discovery',
     type: ['Module', 'Implementation'],
     name: '@solid-notifications/discovery',
@@ -230,6 +244,9 @@ export const implementations = [
     implements: [
       'https://solidproject.org/TR/protocol#server',
       'https://solidproject.org/TR/notifications-protocol#resource-server',
+      'https://solidproject.org/TR/acp#resource-server',
+      'https://solidproject.org/TR/acp#acp-server',
+      'https://solidproject.org/TR/wac#resource-server',
     ]
   },
   {
@@ -278,6 +295,20 @@ export const implementations = [
     implements: [
       'https://solidproject.org/TR/notifications-protocol#subscription-server',
       'https://solid.github.io/notifications/webhook-channel-2023#channel',
+    ]
+  },
+  {
+    id: 'https://github.com/manomayam/manas',
+    type: ['Service', 'Implementation'],
+    name: 'मनस् | Manas',
+    programmingLanguage: 'wikidata:Q575650',
+    maintainer: [
+      'https://github.com/damooo',
+    ],
+    contributor: [
+    ],
+    implements: [
+      'https://solidproject.org/TR/protocol#server',
     ]
   },
 ]

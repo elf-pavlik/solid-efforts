@@ -83,4 +83,40 @@ export const people = [
     name: 'Dmitry Telegin',
     image: 'https://avatars.githubusercontent.com/u/13701445?v=4'
   },
+  {
+    id: 'https://www.w3.org/People/Berners-Lee/card#i',
+    type: [ 'Person' ],
+    name: 'Tim Berners-Lee',
+    image: 'https://avatars.githubusercontent.com/u/1254848?v=4'
+  },
+  {
+    id: 'https://bblfish.net/profile/card#me',
+    type: [ 'Person' ],
+    name: 'Henry Story',
+    image: 'https://avatars.githubusercontent.com/u/124506?v=4'
+  },
+  {
+    id: 'https://virginiabalseiro.com/#me',
+    type: [ 'Person' ],
+    name: 'Virginia Balseiro',
+    image: 'https://avatars.githubusercontent.com/u/28412960?v=4'
+  },
+  {
+    id: 'https://timea.solidcommunity.net/profile/card#me',
+    type: [ 'Person' ],
+    name: 'Timea Turdean',
+    image: 'https://avatars.githubusercontent.com/u/4144203?v=4'
+  },
+  {
+    id: 'https://jeff-zucker.solidcommunity.net/profile/card#me',
+    type: [ 'Person' ],
+    name: 'Jeff Zucker',
+    image: 'https://avatars.githubusercontent.com/u/44732708?v=4'
+  },
+  {
+    id: 'https://github.com/damooo',
+    type: [ 'Person' ],
+    name: 'దామోదర (damooo)',
+    image: 'https://avatars.githubusercontent.com/u/11977457?v=4'
+  },
 ]

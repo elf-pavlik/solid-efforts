@@ -235,4 +235,105 @@ export const drafts = [
     type: [ 'ProductClass' ],
     name: 'Solid Protocol Storage Client',
   },
+  {
+    id: 'https://solidproject.org/TR/acp',
+    type: [ 'Specification', 'Draft' ],
+    name: 'Access Control Policy',
+    editor: [
+      'https://github.com/matthieubosquet',
+    ],
+    author: [
+    ],
+    specifies: [
+      'https://solidproject.org/TR/acp#resource-server',
+      'https://solidproject.org/TR/acp#acp-server',
+    ],
+  },
+  {
+    id: 'https://solidproject.org/TR/acp#resource-server',
+    type: [ 'ProductClass' ],
+    name: 'ACP Resource Server',
+  },
+  {
+    id: 'https://solidproject.org/TR/acp#acp-server',
+    type: [ 'ProductClass' ],
+    name: 'ACP Server',
+  },
+  {
+    id: 'https://solidproject.org/TR/wac',
+    type: [ 'Specification', 'Draft' ],
+    name: 'Web Access Control',
+    editor: [
+      'https://csarven.ca/#i',
+    ],
+    author: [
+      'https://csarven.ca/#i',
+      'https://www.w3.org/People/Berners-Lee/card#i',
+      'https://bblfish.net/profile/card#me',
+    ],
+    specifies: [
+      'https://solidproject.org/TR/wac#resource-server',
+    ],
+  },
+  {
+    id: 'https://solidproject.org/TR/wac#resource-server',
+    type: [ 'ProductClass' ],
+    name: 'WAC Resource Server',
+  },
+  {
+    id: 'https://solid.github.io/webid-profile/',
+    type: [ 'Specification', 'Draft' ],
+    name: 'Solid WebID Profile',
+    editor: [
+      'https://virginiabalseiro.com/#me',
+      'https://jeff-zucker.solidcommunity.net/profile/card#me',
+      'https://csarven.ca/#i',
+    ],
+    author: [
+      'https://virginiabalseiro.com/#me',
+      'https://timea.solidcommunity.net/profile/card#me',
+      'https://jeff-zucker.solidcommunity.net/profile/card#me',
+      'https://csarven.ca/#i',
+      'https://www.w3.org/People/Berners-Lee/card#i',
+    ],
+    specifies: [
+    ],
+  },
+  {
+    id: 'https://solid.github.io/type-indexes/',
+    type: [ 'Specification', 'Draft' ],
+    name: 'Solid Type Indexes',
+    editor: [
+      'https://timea.solidcommunity.net/profile/card#me',
+    ],
+    author: [
+      'https://timea.solidcommunity.net/profile/card#me',
+      'https://virginiabalseiro.com/#me',
+      'https://csarven.ca/#i',
+      'https://www.w3.org/People/Berners-Lee/card#i',
+    ],
+    specifies: [
+    ],
+  },
+  {
+    id: 'https://shapetrees.org/TR/specification/',
+    type: [ 'Specification', 'Draft' ],
+    name: 'Shape Trees',
+    editor: [
+      'https://github.com/justinwb',
+      'https://github.com/ericprud',
+    ],
+    author: [
+      'https://github.com/justinwb',
+      'https://github.com/ericprud',
+    ],
+    specifies: [
+      'https://shapetrees.org/TR/specification/#resource-server',
+    ],
+  },
+  {
+    id: 'https://shapetrees.org/TR/specification/#resource-server',
+    type: [ 'ProductClass' ],
+    name: 'Shape Trees Resource Server',
+  },
 ]
