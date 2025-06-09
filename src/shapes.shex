@@ -1,43 +1,110 @@
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX solidshapes: <http://localhost:3000/shapetrees/shapes/>
-PREFIX ex: <https://vocab.example/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX : <#>
+PREFIX con: <catalog-skos.ttl#>
+PREFIX ex: <http://example.org/#>
+PREFIX spec: <http://www.w3.org/ns/spec#>
+PREFIX schema: <http://schema.org/>
+PREFIX doap: <http://usefulinc.com/ns/doap#>
 
-solidshapes:Person {
-  a [ schema:Person ] ;
-  schema:name xsd:string ;
-  schema:image IRI ;
+:LearningResource {
+(    ex:name xsd:string{1,1};
+      ex:subType [con:Tutorial con:ResearchPaper con:Explainer con:SpecificationSupplement con:OtherLearningResource]{1,1};
+      ex:about IRI ?;
+      ex:technicalKeyword xsd:string*;
+      ex:landingPage IRI ?;
+      ex:provider IRI *;
+      ex:description xsd:string?)
 }
-
-solidshapes:Draft {
-  a [ ex:Draft ] ;
-  schema:name xsd:string ;
-  schema:editor @solidshapes:Person * ;
-  schema:author @solidshapes:Person * ;
-  ex:specifies @solidshapes:ProductClass * ;
-  ex:explains @solidshapes:Draft ? ;
+:Event {
+(    ex:name xsd:string{1,1};
+      ex:description xsd:string?;
+      ex:about IRI ?;
+      ex:provider IRI *;
+      ex:schedule xsd:string?;
+      ex:videoCallPage IRI ?;
+      ex:landingPage IRI ?)
 }
-
-solidshapes:ProductClass {
-  a [ ex:ProductClass ] ;
-  schema:name xsd:string ;
+:Service {
+(    ex:name xsd:string{1,1};
+      ex:subType [con:GeneralPurposePodService con:SpecializedPodService con:CommunicationService con:IdentityService con:StorageService]{1,1};
+      ex:status [con:Exploration con:Development con:Production con:Archived]{1,1};
+      ex:description xsd:string?;
+      ex:contactEmail xsd:string?;
+      ex:logo IRI ?;
+      ex:landingPage IRI ?;
+      ex:repository IRI ?;
+      ex:serviceEndpoint IRI ?;
+      ex:provider IRI *;
+      ex:socialKeyword xsd:string*;
+      ex:serviceBackend IRI *;
+      ex:serviceFrontend IRI *;
+      ex:serviceAudience xsd:string?)
 }
-
-solidshapes:Implementation {
-  a [ ex:Implementation ] ;
-  schema:name xsd:string ;
-  ex:programmingLanguage IRI ;
-  ex:framework IRI ?;
-  ex:maintainer @solidshapes:Person * ;
-  ex:contributor @solidshapes:Person * ;
-  ex:implements @solidshapes:ProductClass * ;
-  ex:dependency @solidshapes:Implementation * ;
-  ex:implements @solidshapes:ProductClass * ;
-  ex:accesses @solidshapes:Scope * ;
+:Product {
+(    ex:name xsd:string{1,1};
+      ex:subType [con:ProductivityApp con:LeisureApp con:PodApp con:OtherApp con:PodServer con:ServerPlugin con:SoftwareLibrary]{1,1};
+      ex:partOf xsd:string*;
+      ex:status [con:Exploration con:Development con:Production con:Archived]{1,1};
+      ex:contactEmail xsd:string?;
+      ex:description xsd:string?;
+      ex:clientID IRI ?;
+      ex:logo IRI ?;
+      ex:landingPage IRI ?;
+      ex:repository IRI ?;
+      ex:webAppEndpoint IRI ?;
+      ex:provider IRI *;
+      doap:maintainer IRI *;
+      doap:developer IRI *;
+      ex:socialKeyword xsd:string*;
+      ex:technicalKeyword xsd:string*;
+      ex:conformsTo IRI *;
+      ex:hasDependencyOn IRI *)
 }
-
-solidshapes:Scope {
-  a [ ex:Scope ] ;
-  schema:name xsd:string ;
-} 
+:Specification {
+(    ex:name xsd:string{1,1};
+      ex:description xsd:string?;
+      ex:repository IRI ?;
+      ex:landingPage IRI ?;
+      schema:editor IRI *;
+      schema:author IRI *;
+      ex:definesConformanceFor IRI *)
+}
+:ClassOfProduct {
+(    ex:name xsd:string{1,1})
+}
+:Ontology {
+(    ex:name xsd:string{1,1};
+      ex:description xsd:string?;
+      ex:namespaceURI IRI ?;
+      ex:prefix xsd:string?)
+}
+:Organization {
+(    ex:name xsd:string{1,1};
+      ex:subType [con:Company con:GovernmentalOrganization con:UniversityProject con:OpenSourceProject con:FundingOrganization con:OtherNGO]{1,1};
+      ex:contactEmail xsd:string?;
+      ex:description xsd:string?;
+      ex:logo IRI ?;
+      ex:webid IRI ?;
+      ex:landingPage IRI ?;
+      ex:repository IRI ?;
+      ex:socialKeyword xsd:string*;
+      ex:resourcesWanted xsd:string*;
+      ex:resourcesOffered xsd:string*)
+}
+:Person {
+(    ex:name xsd:string{1,1};
+      ex:contactEmail xsd:string?;
+      ex:webid IRI ?;
+      ex:forumHandle xsd:string?;
+      ex:matrixHandle xsd:string?;
+      ex:description xsd:string?;
+      ex:logo IRI ?;
+      ex:landingPage IRI ?;
+      ex:repository IRI ?;
+      ex:resourcesWanted xsd:string*;
+      ex:resourcesOffered xsd:string*)
+}
