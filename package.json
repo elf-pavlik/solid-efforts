@@ -12,6 +12,7 @@
     "@janeirodigital/interop-utils": "1.0.0-rc.24",
     "@ldo/ldo": "0.0.1-alpha.24",
     "@mdi/font": "6.2.95",
+    "@rdfjs/data-model": "^2.1.0",
     "core-js": "^3.34.0",
     "roboto-fontface": "*",
     "vue": "^3.4.21",

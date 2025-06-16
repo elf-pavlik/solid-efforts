@@ -12,5 +12,5 @@ const props = defineProps<{
   person: Person
 }>()
 
-const logo = computed(() => props.person.logo || robohash(props.person['@id']!))
+const logo = computed(() => props.person.logo?.['@id'] || robohash(props.person['@id']!))
 </script>

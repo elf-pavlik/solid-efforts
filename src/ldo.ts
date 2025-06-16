@@ -2,8 +2,9 @@ import { useRouter } from "vue-router";
 import { LdoBase, LdoDataset } from "@ldo/ldo";
 import { createLdoDataset } from '@ldo/ldo';
 import { parseJsonld } from '@janeirodigital/interop-utils';
-import { SpecificationShapeType, ProductShapeType, PersonShapeType, ClassOfProductShapeType } from '@/ldo/shapes.shapeTypes'
-import type { Specification, Product, Person, ClassOfProduct } from '@/ldo/shapes.typings';
+import dataFactory from '@rdfjs/data-model'
+import { SpecificationShapeType, SoftwareShapeType, PersonShapeType, ClassOfProductShapeType } from '@/ldo/shapes.shapeTypes'
+import type { Specification, Software, Person, ClassOfProduct } from '@/ldo/shapes.typings';
 
 export type IRI = { '@id': string }
 
@@ -14,10 +15,17 @@ export function robohash(id: string) {
 export function useLdo() {
 
   const router = useRouter()
-
   const ns = {
     rdf: {
       type: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+    },
+    con: {
+      Server: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Server',
+      SoftwareLibrary: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#SoftwareLibrary',
+      ProductivityApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#ProductivityApp',
+      PodApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#PodApp',
+      LeisureApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#LeisureApp',
+      OtherApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#OtherApp',
     },
     schema: {
       Person: 'http://example.org/#Person',
@@ -25,12 +33,14 @@ export function useLdo() {
       editor: 'http://schema.org/editor',
     },
     ex: {
+      subType: 'http://example.org/#subType',
       Primer: 'http://example.org/#Primer',
       Specification: 'http://example.org/#Specification',
       Draft: 'http://example.org/#Draft',
       ClassOfProduct: 'http://example.org/#ClassOfProduct',
       Scope: 'http://example.org/#Scope',
       Product: 'http://example.org/#Product',
+      Software: 'http://example.org/#Software',
       Application: 'http://example.org/#Application',
       Module: 'http://example.org/#Module',
       Service: 'http://example.org/#Service',
@@ -41,6 +51,7 @@ export function useLdo() {
       implements: 'http://example.org/#implements',
       accesses: 'http://example.org/#accesses',
       dependency: 'http://example.org/#dependency',
+      editor: 'http://example.org/#editor',
     },
     wikidata: {
       typescript: 'http://www.wikidata.org/entity/Q978185',
@@ -69,6 +80,7 @@ export function useLdo() {
     return dataset
       .usingType(PersonShapeType)
       .matchSubject(ns.rdf.type, ns.schema.Person)
+      .filter(person => dataset.match(null, dataFactory.namedNode(ns.ex.author), dataFactory.namedNode(person['@id'])).size)
   }
 
   function getPerson(id: string): Person {
@@ -115,27 +127,40 @@ export function useLdo() {
       .fromSubject(id)
   }
 
-  function getApplications(): Product[] {
-    return dataset
-      .usingType(ProductShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Application)
+  function filterApplications(list: Software[]): Software[] {
+    return list.filter(software => dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.OtherApp)).size
+      || dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.LeisureApp)).size
+      || dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.PodApp)).size
+      || dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.ProductivityApp)).size
+    )
   }
 
-  function getModules(): Product[] {
-    return dataset
-      .usingType(ProductShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Module)
+  function getApplications(): Software[] {
+    return filterApplications(dataset
+      .usingType(SoftwareShapeType)
+      .matchSubject(ns.rdf.type, ns.ex.Software))
   }
 
-  function getServices(): Product[] {
-    return dataset
-      .usingType(ProductShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Service)
+  function filterModules(list: Software[]): Software[] {
+    return list.filter(software => dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.SoftwareLibrary)).size)
   }
 
-  function getImplementation(id: string): Product {
+  function getModules(): Software[] {
+    return filterModules(dataset
+      .usingType(SoftwareShapeType)
+      .matchSubject(ns.rdf.type, ns.ex.Software))
+  }
+
+  function getServices(): Software[] {
     return dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
+      .matchSubject(ns.rdf.type, ns.ex.Software)
+      .filter(software => dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.Server)).size)
+  }
+
+  function getImplementation(id: string): Software {
+    return dataset
+      .usingType(SoftwareShapeType)
       .fromSubject(id)
   }
 
@@ -152,32 +177,36 @@ export function useLdo() {
     )
   }
 
-  function getImplementationsForPerson(id: string, type: string): Product[] {
+  function getImplementationsForPerson(id: string, type: string): Software[] {
     const maintainedImpl = dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.maintainer, id)
     // @ts-expect-error
     const maintained = maintainedImpl.filter(i => i.type.find((t: IRI) => t['@id'] === type))
     const contributedImpl = dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.contributor, id)
     // @ts-expect-error
     const contributed = contributedImpl.filter(i => i.type.find((t: IRI) => t['@id'] === type))
     return [...maintained, ...contributed].reduce(
       (acc, impl) => acc.find(d => d['@id'] === impl["@id"]) ? acc : [...acc, impl],
-      [] as Product[]
+      [] as Software[]
     )
   }
 
-  function getApplicationsForPerson(id: string): Product[] {
-    return getImplementationsForPerson(id, ns.ex.Application)
+  function getApplicationsForPerson(id: string): Software[] {
+    return filterApplications(dataset
+      .usingType(SoftwareShapeType)
+      .matchSubject(ns.ex.maintainer, id))
   }
 
-  function getModulesForPerson(id: string): Product[] {
-    return getImplementationsForPerson(id, ns.ex.Module)
+  function getModulesForPerson(id: string): Software[] {
+    return filterModules(dataset
+      .usingType(SoftwareShapeType)
+      .matchSubject(ns.ex.maintainer, id))
   }
 
-  function getServicesForPerson(id: string): Product[] {
+  function getServicesForPerson(id: string): Software[] {
     return getImplementationsForPerson(id, ns.ex.Service)
   }
 
@@ -193,37 +222,37 @@ export function useLdo() {
       .matchSubject(ns.ex.explains, id)
   }
 
-  function getImplementationsForProduct(id: string): Product[] {
+  function getImplementationsForProduct(id: string): Software[] {
     return dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.implements, id)
   }
 
-  function getNonModulesForProduct(id: string): Product[] {
+  function getNonModulesForProduct(id: string): Software[] {
     const all = dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.implements, id)
     // @ts-expect-error
     return all.filter(impl => !impl.type.find((t: IRI) => t['@id'] === ns.ex.Module))
   }
 
-  function getModulesForProduct(id: string): Product[] {
+  function getModulesForProduct(id: string): Software[] {
     const all = dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.implements, id)
     // @ts-expect-error
     return all.filter(impl => impl.type.find((t: IRI) => t['@id'] === ns.ex.Module))
   }
 
-  function getApplicationsForModule(id: string): Product[] {
+  function getApplicationsForModule(id: string): Software[] {
     return dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.dependency, id)
   }
 
-  function getApplicationsForScope(id: string): Product[] {
+  function getApplicationsForScope(id: string): Software[] {
     return dataset
-      .usingType(ProductShapeType)
+      .usingType(SoftwareShapeType)
       .matchSubject(ns.ex.accesses, id)
   }
 
@@ -240,7 +269,7 @@ export function useLdo() {
     return 'mdi-help-box-outline'
   }
 
-  function implementationIcon(implementation: Product) {
+  function implementationIcon(implementation: Software) {
     return 'mdi-help-box-outline'
     // switch (implementation.programmingLanguage["@id"]) {
     //   case ns.wikidata.typescript:
@@ -254,7 +283,7 @@ export function useLdo() {
     // }
   }
 
-  function applicationIcon(implementation: Product) {
+  function applicationIcon(implementation: Software) {
     return 'mdi-cellphone'
     // if (!implementation.framework) return 'mdi-cellphone'
     // switch (implementation.framework["@id"]) {
@@ -285,7 +314,7 @@ export function useLdo() {
     }
   }
 
-  function implementationTypeIcon(implementation: Product) {
+  function implementationTypeIcon(implementation: Software) {
     // @ts-expect-error
     if (implementation.type.find((t: IRI) => t['@id'] === ns.ex.Module)) {
       return implementationIcon(implementation)
@@ -311,14 +340,14 @@ export function useLdo() {
     return draft.author.find((p: Person) => p['@id'] === person['@id'])
   }
 
-  function isMaintainer(impl: Product, person: Person) {
+  function isMaintainer(impl: Software, person: Person) {
     // @ts-expect-error
     return impl.maintainer.find((p: Person) => p['@id'] === person['@id'])
   }
 
-  function isContributor(impl: Product, person: Person) {
+  function isContributor(impl: Software, person: Person) {
     // @ts-expect-error
-    return impl.contributor.find((p: Person) => p['@id'] === person['@id'])
+    return impl.developer.find((p: Person) => p['@id'] === person['@id'])
   }
 
   function getCoverage(id: string): number {
@@ -337,7 +366,7 @@ export function useLdo() {
     if (entity.type['@id'] === 'Specification' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Specification')) {
       name = 'draft'
     }
-    if (entity.type['@id'] === 'Product' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Product')) {
+    if (entity.type['@id'] === 'Software' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Software')) {
       name = 'implementation'
     }
     if (entity.type['@id'] === 'ClassOfProduct' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'ClassOfProduct')) {

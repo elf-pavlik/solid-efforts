@@ -1,53 +1,50 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX : <#>
-PREFIX con: <catalog-skos.ttl#>
+PREFIX : <urn:x-base:default#>
+PREFIX con: <urn:x-base:default./catalog-skos.ttl#>
 PREFIX ex: <http://example.org/#>
-PREFIX spec: <http://www.w3.org/ns/spec#>
-PREFIX schema: <http://schema.org/>
-PREFIX doap: <http://usefulinc.com/ns/doap#>
 
-:LearningResource {
+:SolidResourceShape {
+(    a [ex:CreativeWork ex:Event ex:Software ex:Service ex:Person ex:Organization ex:Specification ex:Ontology]*)
+}
+:CreativeWorkShape {
 (    ex:name xsd:string{1,1};
-      ex:subType [con:Tutorial con:ResearchPaper con:Explainer con:SpecificationSupplement con:OtherLearningResource]{1,1};
+      ex:subType [con:AboutSolid con:AboutSolidApps con:ResearchPaper con:OtherLearningResource con:OtherTechResource]+;
       ex:about IRI ?;
       ex:technicalKeyword xsd:string*;
       ex:landingPage IRI ?;
       ex:provider IRI *;
+      ex:author IRI *;
+      ex:editor IRI *;
       ex:description xsd:string?)
 }
-:Event {
+:EventShape {
 (    ex:name xsd:string{1,1};
       ex:description xsd:string?;
-      ex:about IRI ?;
       ex:provider IRI *;
       ex:schedule xsd:string?;
       ex:videoCallPage IRI ?;
       ex:landingPage IRI ?)
 }
-:Service {
+:ServiceShape {
 (    ex:name xsd:string{1,1};
-      ex:subType [con:GeneralPurposePodService con:SpecializedPodService con:CommunicationService con:IdentityService con:StorageService]{1,1};
+      ex:subType [con:GeneralPurposePodService con:SpecializedPodService con:CommunicationService con:OtherService]+;
       ex:status [con:Exploration con:Development con:Production con:Archived]{1,1};
       ex:description xsd:string?;
       ex:contactEmail xsd:string?;
       ex:logo IRI ?;
-      ex:landingPage IRI ?;
-      ex:repository IRI ?;
       ex:serviceEndpoint IRI ?;
+      ex:landingPage IRI ?;
+      ex:softwareStackIncludes IRI *;
       ex:provider IRI *;
       ex:socialKeyword xsd:string*;
-      ex:serviceBackend IRI *;
-      ex:serviceFrontend IRI *;
       ex:serviceAudience xsd:string?)
 }
-:Product {
+:SoftwareShape {
 (    ex:name xsd:string{1,1};
-      ex:subType [con:ProductivityApp con:LeisureApp con:PodApp con:OtherApp con:PodServer con:ServerPlugin con:SoftwareLibrary]{1,1};
-      ex:partOf xsd:string*;
+      ex:subType [con:ProductivityApp con:LeisureApp con:PodApp con:OtherApp con:PodServer con:ServerPlugin con:SoftwareLibrary]+;
       ex:status [con:Exploration con:Development con:Production con:Archived]{1,1};
       ex:contactEmail xsd:string?;
       ex:description xsd:string?;
@@ -55,47 +52,49 @@ PREFIX doap: <http://usefulinc.com/ns/doap#>
       ex:logo IRI ?;
       ex:landingPage IRI ?;
       ex:repository IRI ?;
-      ex:webAppEndpoint IRI ?;
+      ex:showcase IRI ?;
       ex:provider IRI *;
-      doap:maintainer IRI *;
-      doap:developer IRI *;
+      ex:maintainer IRI *;
+      ex:developer IRI *;
       ex:socialKeyword xsd:string*;
       ex:technicalKeyword xsd:string*;
       ex:conformsTo IRI *;
       ex:hasDependencyOn IRI *)
 }
-:Specification {
-(    ex:name xsd:string{1,1};
+:SpecificationShape {
+(    a [ex:Specification]{1,1};
+      ex:name xsd:string{1,1};
       ex:description xsd:string?;
       ex:repository IRI ?;
       ex:landingPage IRI ?;
-      schema:editor IRI *;
-      schema:author IRI *;
+      ex:editor IRI *;
+      ex:author IRI *;
       ex:definesConformanceFor IRI *)
 }
-:ClassOfProduct {
+:ClassOfProductShape {
 (    ex:name xsd:string{1,1})
 }
-:Ontology {
+:OntologyShape {
 (    ex:name xsd:string{1,1};
       ex:description xsd:string?;
       ex:namespaceURI IRI ?;
-      ex:prefix xsd:string?)
+      ex:prefix xsd:string?;
+      ex:repository IRI ?;
+      ex:landingPage IRI ?)
 }
-:Organization {
+:OrganizationShape {
 (    ex:name xsd:string{1,1};
-      ex:subType [con:Company con:GovernmentalOrganization con:UniversityProject con:OpenSourceProject con:FundingOrganization con:OtherNGO]{1,1};
+      ex:subType [con:Company con:GovernmentalOrganization con:UniversityProject con:OpenSourceProject con:FundingOrganization con:OtherNGO]+;
       ex:contactEmail xsd:string?;
       ex:description xsd:string?;
       ex:logo IRI ?;
       ex:webid IRI ?;
       ex:landingPage IRI ?;
-      ex:repository IRI ?;
       ex:socialKeyword xsd:string*;
       ex:resourcesWanted xsd:string*;
       ex:resourcesOffered xsd:string*)
 }
-:Person {
+:PersonShape {
 (    ex:name xsd:string{1,1};
       ex:contactEmail xsd:string?;
       ex:webid IRI ?;
@@ -104,7 +103,6 @@ PREFIX doap: <http://usefulinc.com/ns/doap#>
       ex:description xsd:string?;
       ex:logo IRI ?;
       ex:landingPage IRI ?;
-      ex:repository IRI ?;
       ex:resourcesWanted xsd:string*;
       ex:resourcesOffered xsd:string*)
 }
