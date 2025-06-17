@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product of impl.implements">
+          <tr v-for="product of impl.conformsTo">
             <td>
               <draft-list-item :draft="product" icon="mdi-star-box-outline"
                 @click="ldo.show(product)"></draft-list-item>
@@ -48,13 +48,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dependency of impl.dependency">
+          <tr v-for="dependency of impl.hasDependencyOn as Software[]">
             <td>
               <draft-list-item :draft="dependency" :icon="ldo.implementationIcon(dependency)"
                 @click="ldo.show(dependency)">
               </draft-list-item>
             </td>
-            <draft-list-item v-for="product of dependency.implements" :draft="product" icon="mdi-star-box-outline"
+            <draft-list-item v-for="product of dependency.conformsTo" :draft="product" icon="mdi-star-box-outline"
               @click="ldo.show(product)">
             </draft-list-item>
           </tr>
@@ -74,7 +74,7 @@
     <person-list-item v-for="person of impl.maintainer" :person="person" @click="ldo.show(person)">
     </person-list-item>
     <h4>Contributors</h4>
-    <person-list-item v-for="person of impl.contributor" :person="person" @click="ldo.show(person)">
+    <person-list-item v-for="person of impl.developer" :person="person" @click="ldo.show(person)">
     </person-list-item>
 
   </v-responsive>
@@ -84,6 +84,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useLdo } from '@/ldo';
+import { Software } from '@/ldo/shapes.typings';
 
 const route = useRoute()
 const ldo = useLdo()

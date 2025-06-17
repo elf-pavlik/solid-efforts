@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/types": "^7.24.0",
     "@ldo/cli": "0.0.1-alpha.24",
+    "@rdfjs/types": "^2.0.1",
     "@types/jsonld": "^1.5.14",
     "@types/node": "^20.11.25",
     "@types/shexj": "^2.1.7",

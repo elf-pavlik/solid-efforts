@@ -1,18 +1,15 @@
 <template>
-  <v-list-item
-    :title="props.draft.name"
-    :prepend-icon="props.icon"
-  >
+  <v-list-item :title="props.draft.name" :prepend-icon="props.icon">
   </v-list-item>
 </template>
 
 <script setup lang="ts">
 
-import type { Draft } from '@/ldo/shapes.typings';
+import type { Specification, CreativeWork } from '@/ldo/shapes.typings';
 
 const props = defineProps<{
-  draft: Draft
+  draft: Specification | CreativeWork
   icon?: string
 }>()
-  
+
 </script>

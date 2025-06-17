@@ -1,20 +1,17 @@
 <template>
-  <v-list-item
-    :title="props.app.name"
-    :prepend-icon="ldo.applicationIcon(props.app)"
-  >
+  <v-list-item :title="props.app.name" :prepend-icon="ldo.applicationIcon(props.app)">
   </v-list-item>
 </template>
 
 <script setup lang="ts">
 
-import type { Implementation } from '@/ldo/shapes.typings';
+import type { Software } from '@/ldo/shapes.typings';
 import { useLdo } from '@/ldo'
 
 const props = defineProps<{
-  app: Implementation
+  app: Software
 }>()
 
 const ldo = useLdo()
-  
+
 </script>

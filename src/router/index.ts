@@ -12,6 +12,7 @@ import Draft from '@/pages/Draft.vue'
 import Implementation from '@/pages/Implementation.vue'
 import Product from '@/pages/Product.vue'
 import Scope from '@/pages/Scope.vue'
+import Paper from '@/pages/Paper.vue'
 
 const routes = [
   { path: '/', name: 'home', component: Home },
@@ -20,11 +21,12 @@ const routes = [
   { path: '/implementation', name: 'implementation', component: Implementation },
   { path: '/product', name: 'product', component: Product },
   { path: '/scope', name: 'scope', component: Scope },
+  { path: '/paper', name: 'paper', component: Paper },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes 
+  routes
 })
 
 export default router

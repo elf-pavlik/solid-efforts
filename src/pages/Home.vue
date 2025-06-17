@@ -33,6 +33,11 @@
             <v-badge inline :content="services.length"></v-badge>
           </template>
         </v-tab>
+        <v-tab prepend-icon="mdi-newspaper-variant" text="Papers" value="papers">
+          <template #append>
+            <v-badge inline :content="papers.length"></v-badge>
+          </template>
+        </v-tab>
       </v-tabs>
       <v-tabs-window v-model="tab" class="flex-grow-1">
         <v-tabs-window-item value="people">
@@ -61,6 +66,10 @@
         <v-tabs-window-item value="services">
           <draft-list-item v-for="service of services" :draft="service" :icon="ldo.implementationIcon(service)"
             @click="ldo.show(service)">
+          </draft-list-item>
+        </v-tabs-window-item>
+        <v-tabs-window-item value="papers">
+          <draft-list-item v-for="paper of papers" :draft="paper" icon="mdi-newspaper-variant" @click="ldo.show(paper)">
           </draft-list-item>
         </v-tabs-window-item>
       </v-tabs-window>
@@ -96,4 +105,5 @@ const applications = ldo.getApplications()
 const products = ldo.getProductClasses()
 const modules = ldo.getModules()
 const services = ldo.getServices()
+const papers = ldo.getPapers()
 </script>

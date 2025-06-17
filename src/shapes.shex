@@ -6,10 +6,10 @@ PREFIX : <urn:x-base:default#>
 PREFIX con: <urn:x-base:default./catalog-skos.ttl#>
 PREFIX ex: <http://example.org/#>
 
-:SolidResourceShape {
+:SolidResource {
 (    a [ex:CreativeWork ex:Event ex:Software ex:Service ex:Person ex:Organization ex:Specification ex:Ontology]*)
 }
-:CreativeWorkShape {
+:CreativeWork {
 (    ex:name xsd:string{1,1};
       ex:subType [con:AboutSolid con:AboutSolidApps con:ResearchPaper con:OtherLearningResource con:OtherTechResource]+;
       ex:about IRI ?;
@@ -20,7 +20,7 @@ PREFIX ex: <http://example.org/#>
       ex:editor IRI *;
       ex:description xsd:string?)
 }
-:EventShape {
+:Event {
 (    ex:name xsd:string{1,1};
       ex:description xsd:string?;
       ex:provider IRI *;
@@ -28,7 +28,7 @@ PREFIX ex: <http://example.org/#>
       ex:videoCallPage IRI ?;
       ex:landingPage IRI ?)
 }
-:ServiceShape {
+:Service {
 (    ex:name xsd:string{1,1};
       ex:subType [con:GeneralPurposePodService con:SpecializedPodService con:CommunicationService con:OtherService]+;
       ex:status [con:Exploration con:Development con:Production con:Archived]{1,1};
@@ -42,7 +42,7 @@ PREFIX ex: <http://example.org/#>
       ex:socialKeyword xsd:string*;
       ex:serviceAudience xsd:string?)
 }
-:SoftwareShape {
+:Software {
 (    ex:name xsd:string{1,1};
       ex:subType [con:ProductivityApp con:LeisureApp con:PodApp con:OtherApp con:PodServer con:ServerPlugin con:SoftwareLibrary]+;
       ex:status [con:Exploration con:Development con:Production con:Archived]{1,1};
@@ -61,7 +61,7 @@ PREFIX ex: <http://example.org/#>
       ex:conformsTo IRI *;
       ex:hasDependencyOn IRI *)
 }
-:SpecificationShape {
+:Specification {
 (    a [ex:Specification]{1,1};
       ex:name xsd:string{1,1};
       ex:description xsd:string?;
@@ -71,10 +71,10 @@ PREFIX ex: <http://example.org/#>
       ex:author IRI *;
       ex:definesConformanceFor IRI *)
 }
-:ClassOfProductShape {
+:ClassOfProduct {
 (    ex:name xsd:string{1,1})
 }
-:OntologyShape {
+:Ontology {
 (    ex:name xsd:string{1,1};
       ex:description xsd:string?;
       ex:namespaceURI IRI ?;
@@ -82,7 +82,7 @@ PREFIX ex: <http://example.org/#>
       ex:repository IRI ?;
       ex:landingPage IRI ?)
 }
-:OrganizationShape {
+:Organization {
 (    ex:name xsd:string{1,1};
       ex:subType [con:Company con:GovernmentalOrganization con:UniversityProject con:OpenSourceProject con:FundingOrganization con:OtherNGO]+;
       ex:contactEmail xsd:string?;
@@ -94,7 +94,7 @@ PREFIX ex: <http://example.org/#>
       ex:resourcesWanted xsd:string*;
       ex:resourcesOffered xsd:string*)
 }
-:PersonShape {
+:Person {
 (    ex:name xsd:string{1,1};
       ex:contactEmail xsd:string?;
       ex:webid IRI ?;
