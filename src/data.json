@@ -473,6 +473,112 @@
       {
         "@id": "https://communitysolidserver.github.io/CommunitySolidServer/latest/"
       }
+    ],
+    "http://example.org/#conformsTo": [
+      {
+        "@id": "https://solidproject.org/TR/protocol#Server"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/oidc#Provider"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/wac#Server"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#ACP_Resource_Server"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#ACP_Server"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#ResourceServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#SubscriptionServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#StreamingHTTPChannel2023NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023SubscriptionServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebSocketChannel2023SubscriptionServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebSocketChannel2023NotificationSender"
+      }
+    ]
+  },
+  {
+    "@id": "urn:uuid:b659b08f-9054-47a5-af77-9a08016eb7ba",
+    "@type": [
+      "http://example.org/#Software"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Client"
+      }
+    ],
+    "http://example.org/#status": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Production"
+      }
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#SoftwareLibrary"
+      }
+    ],
+    "http://example.org/#landingPage": [
+      {
+        "@id": "https://github.com/o-development/solid-notification-client/"
+      }
+    ],
+    "http://example.org/#repository": [
+      {
+        "@id": "https://github.com/o-development/solid-notification-client/"
+      }
+    ],
+    "http://example.org/#conformsTo": [
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#DiscoveryClient"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#SubscriptionClient"
+      }
+    ],
+    "http://example.org/#maintainer": [
+      {
+        "@id": "https://elf-pavlik.hackers4peace.net"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Jackson_Morgan"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Wout_Slabbinck"
+      }
     ]
   },
   {
@@ -5910,6 +6016,102 @@
     ]
   },
   {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Christoph_Braun",
+    "@type": [
+      "http://example.org/#Person"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Person"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Christoph Braun"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Andreas_Both",
+    "@type": [
+      "http://example.org/#Person"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Person"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Andreas Both"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Thorsten_Kastner",
+    "@type": [
+      "http://example.org/#Person"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Person"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Thorsten Kastner"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Dustin_Yeboah",
+    "@type": [
+      "http://example.org/#Person"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Person"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Dustin Yeboah"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Daniel_Schraudner",
+    "@type": [
+      "http://example.org/#Person"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Person"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Daniel Schraudner"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Sebastian_Schmid",
+    "@type": [
+      "http://example.org/#Person"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Person"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Sebastian Schmid"
+      }
+    ]
+  },
+  {
     "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Stefan_Dercon",
     "@type": [
       "http://example.org/#Person"
@@ -9256,12 +9458,32 @@
     ],
     "http://example.org/#hasDependencyOn": [
       {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Solid_client_authn_node"
+      }
+      ,
+      {
         "@id": "https://sai.js.org/authorization-agent"
       }
-    ],
-    "http://example.org/#landingPage": [
+      ,
       {
-        "@id": "https://sai.js.org"
+        "@id": "urn:uuid:b659b08f-9054-47a5-af77-9a08016eb7ba"
+      }
+    ],
+    "http://example.org/#conformsTo": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023SubscriptionServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023SubscriptionClient"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023NotificationReceiver"
       }
     ]
   },
@@ -9338,7 +9560,20 @@
     ],
     "http://example.org/#hasDependencyOn": [
       {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Solid_client_authn_browser"
+      }
+      ,
+      {
         "@id": "https://sai.js.org/application"
+      }
+      ,
+      {
+        "@id": "urn:uuid:b659b08f-9054-47a5-af77-9a08016eb7ba"
+      }
+    ],
+    "http://example.org/#conformsTo": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#StreamingHTTPChannel2023NotificationReceiver"
       }
     ],
     "http://example.org/#landingPage": [
@@ -10292,6 +10527,16 @@
         "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Inrupt"
       }
     ],
+    "http://example.org/#description": [
+      {
+        "@value": "A client library for authenticating with Solid."
+      }
+    ],
+    "http://example.org/#repository": [
+      {
+        "@id": "https://github.com/inrupt/solid-client-authn-js"
+      }
+    ],
     "http://example.org/#status": [
       {
         "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Production"
@@ -10300,6 +10545,11 @@
     "http://example.org/#programmingLanguage": [
       {
         "@value": "Typescript"
+      }
+    ],
+    "http://example.org/#conformsTo": [
+      {
+        "@id": "https://solidproject.org/TR/oidc#Client"
       }
     ],
     "http://example.org/#technicalKeyword": [
@@ -10346,6 +10596,11 @@
     "http://example.org/#programmingLanguage": [
       {
         "@value": "Typescript"
+      }
+    ],
+    "http://example.org/#conformsTo": [
+      {
+        "@id": "https://solidproject.org/TR/oidc#Client"
       }
     ],
     "http://example.org/#technicalKeyword": [
@@ -13075,7 +13330,7 @@
     ],
     "http://example.org/#about": [
       {
-        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Web_Access_Control"
+        "@id": "https://solidproject.org/TR/wac"
       }
       ,
       {
@@ -13085,6 +13340,82 @@
     "http://example.org/#description": [
       {
         "@value": "The User-Managed Access (UMA) extension to OAuth 2.0 is a promising candidate for increasing Digital Trust in personal data ecosystems like Solid. With minor modifications, it can achieve many requirements regarding usage control and transaction contextualization, even though additional specification is needed to address delegation of control and retraction of usage policies.",
+        "@language": "en"
+      }
+    ]
+  },
+  {
+    "@id": "https://publikationen.bibliothek.kit.edu/1000172187",
+    "@type": [
+      "http://example.org/#CreativeWork"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "AuthApp – Portable, Reusable Solid App for GDPR-Compliant Access Granting",
+        "@language": "en"
+      }
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#ResearchPaper"
+      }
+    ],
+    "http://example.org/#technicalKeyword": [
+      {
+        "@value": "Authorization, Access Control, Data Sharing, Access Granting, Zero Trust, Data Sovereignty",
+        "@language": "en"
+      }
+    ],
+    "http://example.org/#landingPage": [
+      {
+        "@id": "https://publikationen.bibliothek.kit.edu/1000172187/156135196"
+      }
+    ],
+    "http://example.org/#author": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Andreas_Both"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Thorsten_Kastner"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Dustin_Yeboah"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Christoph_Braun"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Daniel_Schraudner"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Sebastian_Schmid"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Tobias_Käfer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Andreas_Harth"
+      }
+    ],
+    "http://example.org/#about": [
+      {
+        "@id": "https://solidproject.org/TR/wac"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Solid_Application_Interoperability"
+      }
+    ],
+    "http://example.org/#description": [
+      {
+        "@value": "The Solid (Social Linked Data) technology family was de-\nveloped to provide the foundation for Data Sovereignty in the context\nof web applications. The advantage of this innovative approach is the\nopportunity to dynamically bind an identity to a Solid application and a\nuser-specific Solid data store (Solid Pod). These three basic components\ncan be combined dynamically, allowing users to share their data with an\napplication while retaining full control of the data in self-managed Solid\nPods. This paper presents a prototype of a web-based user interface to\ngrant access to data in a Solid Pod. To enable a dynamic binding into\nSolid-driven environments, we made the implementation available as a\nSolid application – AuthApp – with a specific focus on allowing users\nto configure the data access granting efficiently. To comply with data\nprotection regulations, in particular Europe’s GDPR, we extended the\nstandard to include the validation of the purpose of data sharing. Unlike\nprevious work, we also make full use of robust technologies to avoid the\nneed to copy or store data outside the personal context, meaning all data\nremains under the user’s control and so does the AuthApp.",
         "@language": "en"
       }
     ]
@@ -15380,7 +15711,7 @@
     ]
   },
   {
-    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Solid_Protocol",
+    "@id": "https://solidproject.org/TR/protocol",
     "@type": [
       "http://example.org/#Specification"
     ],
@@ -15402,6 +15733,15 @@
     "http://example.org/#repository": [
       {
         "@id": "https://github.com/solid/specification"
+      }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.org/TR/protocol#Client"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/protocol#Server"
       }
     ]
   },
@@ -15456,6 +15796,15 @@
         "@id": "https://github.com/solid/solid-oidc"
       }
     ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.org/TR/oidc#Client"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/oidc#Provider"
+      }
+    ],
     "http://example.org/#editor": [
       {
         "@id": "https://elf-pavlik.hackers4peace.net"
@@ -15502,7 +15851,7 @@
     ]
   },
   {
-    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Web_Access_Control",
+    "@id": "https://solidproject.org/TR/wac",
     "@type": [
       "http://example.org/#Specification"
     ],
@@ -15550,6 +15899,15 @@
     "http://example.org/#repository": [
       {
         "@id": "https://github.com/solid/authorization-panel"
+      }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#ACP_Resource_Server"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#ACP_Server"
       }
     ]
   },
@@ -15651,7 +16009,7 @@
     ]
   },
   {
-    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#Solid_Notifications_Protocol",
+    "@id": "https://solidproject.org/TR/notifications-protocol",
     "@type": [
       "http://example.org/#Specification"
     ],
@@ -15678,6 +16036,31 @@
     "http://example.org/#author": [
       {
         "@id": "https://elf-pavlik.hackers4peace.net"
+      }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#ResourceServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#DiscoveryClient"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#SubscriptionClient"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#SubscriptionServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.org/TR/notifications-protocol#NotificationReceiver"
       }
     ]
   },
@@ -15767,6 +16150,15 @@
       {
         "@id": "https://elf-pavlik.hackers4peace.net"
       }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#StreamingHTTPChannel2023NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#StreamingHTTPChannel2023NotificationReceiver"
+      }
     ]
   },
   {
@@ -15792,6 +16184,15 @@
     "http://example.org/#landingPage": [
       {
         "@id": "https://solid.github.io/notifications/websocket-channel-2023"
+      }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebSocketChannel2023SubscriptionServer"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebSocketChannel2023NotificationSender"
       }
     ]
   },
@@ -15828,6 +16229,64 @@
     "http://example.org/#author": [
       {
         "@id": "https://elf-pavlik.hackers4peace.net"
+      }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023SubscriptionClient"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023NotificationReceiver"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023",
+    "@type": [
+      "http://example.org/#Specification"
+    ],
+    "http://example.org/#subType": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Specification"
+      }
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "WebPushChannel2023"
+      }
+    ],
+    "http://example.org/#repository": [
+      {
+        "@id": "https://github.com/solid/notifications"
+      }
+    ],
+    "http://example.org/#landingPage": [
+      {
+        "@id": "https://solid.github.io/notifications/webpush-channel-2023"
+      }
+    ],
+    "http://example.org/#editor": [
+      {
+        "@id": "https://elf-pavlik.hackers4peace.net"
+      }
+    ],
+    "http://example.org/#author": [
+      {
+        "@id": "https://elf-pavlik.hackers4peace.net"
+      }
+    ],
+    "http://example.org/#definesConformanceFor": [
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023NotificationSender"
+      }
+      ,
+      {
+        "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023SubscriptionServer"
       }
     ]
   },
@@ -17807,6 +18266,270 @@
     "http://example.org/#name": [
       {
         "@value": "SAI Authorization Agent"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#ACP_Resource_Server",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "ACP Resource Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#ACP_Server",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "ACP Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/oidc#Client",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid-OIDC Client"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/oidc#Provider",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid-OIDC Provider"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/wac#Client",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "WAC Client"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/wac#Server",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "WAC Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/protocol#Client",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Client"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/protocol#Server",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/notifications-protocol#ResourceServer",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Resource Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/notifications-protocol#DiscoveryClient",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Discovery Client"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/notifications-protocol#SubscriptionClient",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Subscription Client"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/notifications-protocol#SubscriptionServer",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Subscription Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/notifications-protocol#NotificationSender",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Notification Sender"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.org/TR/notifications-protocol#NotificationReceiver",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Notifications Notification Receiver"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023NotificationSender",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid WebPush Notification Sender"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebPushChannel2023SubscriptionServer",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid WebPush Subscription Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023SubscriptionClient",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Webhook Subscription Client"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023SubscriptionServer",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Webhook Subscription Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023NotificationSender",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Webhook Notification Sender"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebhookChannel2023NotificationReceiver",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Webhook Notification Receiver"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#StreamingHTTPChannel2023NotificationSender",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Streaming HTTP Notification Sender"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#StreamingHTTPChannel2023NotificationReceiver",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid Streaming HTTP Notification Receiver"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebSocketChannel2023SubscriptionServer",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid WebSocket Subscription Server"
+      }
+    ]
+  },
+  {
+    "@id": "https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl#WebSocketChannel2023NotificationSender",
+    "@type": [
+      "http://example.org/#ClassOfProduct"
+    ],
+    "http://example.org/#name": [
+      {
+        "@value": "Solid WebSocket Notification Sender"
       }
     ]
   }

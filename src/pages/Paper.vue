@@ -8,12 +8,16 @@
       {{ paper.description }}
     </section>
 
-    <section v-if="paper.about && (paper.about as unknown as []).length">
+    <section v-if="paper.about">
       <h4>References</h4>
-      <v-list>
+      <v-list v-if="(paper.about as unknown as []).length">
         <draft-list-item v-for="specification of paper.about" :draft="specification"
           :icon="ldo.draftIcon(specification as unknown as Specification)"
           @click="ldo.show(specification as unknown as LdoBase)"></draft-list-item>
+      </v-list>
+      <v-list v-else>
+        <draft-list-item :draft="paper.about" :icon="ldo.draftIcon(paper.about as unknown as Specification)"
+          @click="ldo.show(paper.about as unknown as LdoBase)"></draft-list-item>
       </v-list>
     </section>
 
