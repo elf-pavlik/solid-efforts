@@ -99,7 +99,7 @@ watch(
   (value) => tab.value = value as string || defaultTab
 )
 
-const people = ldo.getPeople()
+const people = ldo.getPeople(true)
 const drafts = ldo.getDrafts()
 const applications = ldo.getApplications()
 const products = ldo.getProductClasses()

@@ -22,40 +22,40 @@ export function useLdo() {
       type: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
     },
     con: {
-      Server: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Server',
-      SoftwareLibrary: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#SoftwareLibrary',
-      ProductivityApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#ProductivityApp',
-      PodApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#PodApp',
-      LeisureApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#LeisureApp',
-      OtherApp: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#OtherApp',
-      Primer: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#Primer',
-      ResearchPaper: 'https://solidproject.solidcommunity.net/catalog/v2/catalog-skos.ttl#ResearchPaper',
+      Server: 'https://solidproject.solidcommunity.net/catalog/taxonomy#PodServer',
+      SoftwareLibrary: 'https://solidproject.solidcommunity.net/catalog/taxonomy#SoftwareLibrary',
+      ProductivityApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#ProductivityApp',
+      PodApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#PodApp',
+      LeisureApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#LeisureApp',
+      OtherApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#OtherApp',
+      Primer: 'https://solidproject.solidcommunity.net/catalog/taxonomy#Primer',
+      ResearchPaper: 'https://solidproject.solidcommunity.net/catalog/taxonomy#ResearchPaper',
     },
     ex: {
-      subType: 'http://example.org/#subType',
-      Person: 'http://example.org/#Person',
-      author: 'http://example.org/#author',
-      editor: 'http://example.org/#editor',
-      Primer: 'http://example.org/#Primer',
-      Specification: 'http://example.org/#Specification',
-      Draft: 'http://example.org/#Draft',
-      ClassOfProduct: 'http://example.org/#ClassOfProduct',
-      Scope: 'http://example.org/#Scope',
-      Product: 'http://example.org/#Product',
-      Software: 'http://example.org/#Software',
-      Application: 'http://example.org/#Application',
-      Module: 'http://example.org/#Module',
-      Service: 'http://example.org/#Service',
-      maintainer: 'http://example.org/#maintainer',
-      developer: 'http://example.org/#developer',
-      specifies: 'http://example.org/#specifies',
-      explains: 'http://example.org/#explains',
-      implements: 'http://example.org/#implements',
-      accesses: 'http://example.org/#accesses',
-      hasDependencyOn: 'http://example.org/#hasDependencyOn',
-      definesConformanceFor: 'http://example.org/#definesConformanceFor',
-      conformsTo: 'http://example.org/#conformsTo',
-      about: 'http://example.org/#about',
+      subType: 'http://example.org#subType',
+      Person: 'http://example.org#Person',
+      author: 'http://example.org#author',
+      editor: 'http://example.org#editor',
+      Primer: 'http://example.org#Primer',
+      Specification: 'http://example.org#Specification',
+      Draft: 'http://example.org#Draft',
+      ClassOfProduct: 'http://example.org#ClassOfProduct',
+      Scope: 'http://example.org#Scope',
+      Product: 'http://example.org#Product',
+      Software: 'http://example.org#Software',
+      Application: 'http://example.org#Application',
+      Module: 'http://example.org#Module',
+      Service: 'http://example.org#Service',
+      maintainer: 'http://example.org#maintainer',
+      developer: 'http://example.org#developer',
+      specifies: 'http://example.org#specifies',
+      explains: 'http://example.org#explains',
+      implements: 'http://example.org#implements',
+      accesses: 'http://example.org#accesses',
+      hasDependencyOn: 'http://example.org#hasDependencyOn',
+      definesConformanceFor: 'http://example.org#definesConformanceFor',
+      conformsTo: 'http://example.org#conformsTo',
+      about: 'http://example.org#about',
     },
     wikidata: {
       typescript: 'http://www.wikidata.org/entity/Q978185',
@@ -88,10 +88,11 @@ export function useLdo() {
       || dataset.match(null, dataFactory.namedNode(ns.ex.developer), dataFactory.namedNode(person['@id'])).size)
   }
 
-  function getPeople(): Person[] {
-    return filterPeople(dataset
+  function getPeople(filter = false): Person[] {
+    const people = dataset
       .usingType(PersonShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Person))
+      .matchSubject(ns.rdf.type, ns.ex.Person)
+    return filter ? filterPeople(people) : people
   }
 
   function getPerson(id: string): Person {

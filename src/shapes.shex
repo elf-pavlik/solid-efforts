@@ -2,9 +2,9 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX : <urn:x-base:default#>
-PREFIX con: <urn:x-base:default./catalog-skos.ttl#>
-PREFIX ex: <http://example.org/#>
+PREFIX ex: <http://example.org#>
+PREFIX con: <https://solidproject.solidcommunity.net/catalog/taxonomy#>
+PREFIX : <https://solidproject.solidcommunity.net/catalog/shapes#>
 
 :SolidResource {
 (    a [ex:CreativeWork ex:Event ex:Software ex:Service ex:Person ex:Organization ex:Specification ex:Ontology]*)
