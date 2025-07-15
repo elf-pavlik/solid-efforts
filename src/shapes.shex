@@ -11,8 +11,8 @@ PREFIX : <https://solidproject.solidcommunity.net/catalog/shapes#>
 }
 :CreativeWork {
 (    ex:name xsd:string{1,1};
-      ex:subType [con:AboutSolid con:AboutSolidApps con:ResearchPaper con:OtherLearningResource con:OtherTechResource]+;
-      ex:about IRI ?;
+      ex:subType [con:AboutSolid con:AboutSolidApps con:ResearchPaper con:OtherLearningResource con:OtherTechResource con:Primer]+;
+      ex:about IRI *;
       ex:technicalKeyword xsd:string*;
       ex:landingPage IRI ?;
       ex:provider IRI *;

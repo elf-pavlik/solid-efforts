@@ -4,16 +4,18 @@
     <draft-list-item :draft="draft" :icon="ldo.draftIcon(draft)" @click="ldo.show(draft)">
     </draft-list-item>
 
-    <section v-if="(draft as Specification).definesConformanceFor!.length">
+    <section v-if="(draft as Specification).definesConformanceFor!.size">
       <product-implementations-table
         :products="(draft as Specification).definesConformanceFor"></product-implementations-table>
     </section>
 
-    <section v-if="(draft as CreativeWork).about">
+    <section v-if="(draft as CreativeWork).about!.size">
       <h4>Explains</h4>
-      <draft-list-item :draft="(draft as CreativeWork).about as Specification"
-        :icon="ldo.draftIcon((draft as CreativeWork).about as Specification)"
-        @click="ldo.show((draft as CreativeWork).about!)"></draft-list-item>
+      <v-list>
+        <draft-list-item v-for="specification of (draft as CreativeWork).about" :draft="specification"
+          :icon="ldo.draftIcon(specification as unknown as Specification)"
+          @click="ldo.show(specification)"></draft-list-item>
+      </v-list>
     </section>
 
     <section v-if="primers.length">

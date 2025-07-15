@@ -1,5 +1,6 @@
 import { useRouter } from "vue-router";
 import { LdoBase, LdoDataset } from "@ldo/ldo";
+import { createVocabulary } from 'rdf-vocabulary'
 import { createLdoDataset } from '@ldo/ldo';
 import { parseJsonld } from '@janeirodigital/interop-utils';
 // @ts-ignore
@@ -18,45 +19,42 @@ export function useLdo() {
 
   const router = useRouter()
   const ns = {
-    rdf: {
-      type: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-    },
-    con: {
-      Server: 'https://solidproject.solidcommunity.net/catalog/taxonomy#PodServer',
-      SoftwareLibrary: 'https://solidproject.solidcommunity.net/catalog/taxonomy#SoftwareLibrary',
-      ProductivityApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#ProductivityApp',
-      PodApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#PodApp',
-      LeisureApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#LeisureApp',
-      OtherApp: 'https://solidproject.solidcommunity.net/catalog/taxonomy#OtherApp',
-      Primer: 'https://solidproject.solidcommunity.net/catalog/taxonomy#Primer',
-      ResearchPaper: 'https://solidproject.solidcommunity.net/catalog/taxonomy#ResearchPaper',
-    },
-    ex: {
-      subType: 'http://example.org#subType',
-      Person: 'http://example.org#Person',
-      author: 'http://example.org#author',
-      editor: 'http://example.org#editor',
-      Primer: 'http://example.org#Primer',
-      Specification: 'http://example.org#Specification',
-      Draft: 'http://example.org#Draft',
-      ClassOfProduct: 'http://example.org#ClassOfProduct',
-      Scope: 'http://example.org#Scope',
-      Product: 'http://example.org#Product',
-      Software: 'http://example.org#Software',
-      Application: 'http://example.org#Application',
-      Module: 'http://example.org#Module',
-      Service: 'http://example.org#Service',
-      maintainer: 'http://example.org#maintainer',
-      developer: 'http://example.org#developer',
-      specifies: 'http://example.org#specifies',
-      explains: 'http://example.org#explains',
-      implements: 'http://example.org#implements',
-      accesses: 'http://example.org#accesses',
-      hasDependencyOn: 'http://example.org#hasDependencyOn',
-      definesConformanceFor: 'http://example.org#definesConformanceFor',
-      conformsTo: 'http://example.org#conformsTo',
-      about: 'http://example.org#about',
-    },
+    rdf: createVocabulary('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'type'),
+    con: createVocabulary('https://solidproject.solidcommunity.net/catalog/taxonomy#',
+      'PodServer',
+      'SoftwareLibrary',
+      'ProductivityApp',
+      'PodApp',
+      'LeisureApp',
+      'OtherApp',
+      'Primer',
+      'Specification',
+      'ResearchPaper'),
+    ex: createVocabulary('http://example.org#',
+      'subType',
+      'Person',
+      'author',
+      'editor',
+      'Specification',
+      'Draft',
+      'ClassOfProduct',
+      'Scope',
+      'Product',
+      'Software',
+      'Application',
+      'Module',
+      'Service',
+      'maintainer',
+      'developer',
+      'specifies',
+      'explains',
+      'implements',
+      'accesses',
+      'hasDependencyOn',
+      'definesConformanceFor',
+      'conformsTo',
+      'about',
+    ),
     wikidata: {
       typescript: 'http://www.wikidata.org/entity/Q978185',
       java: 'http://www.wikidata.org/entity/Q251',
@@ -89,9 +87,9 @@ export function useLdo() {
   }
 
   function getPeople(filter = false): Person[] {
-    const people = dataset
+    const people = [...dataset
       .usingType(PersonShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Person)
+      .matchSubject(ns.rdf.type, ns.ex.Person)]
     return filter ? filterPeople(people) : people
   }
 
@@ -114,14 +112,14 @@ export function useLdo() {
 
   function getDraft(id: string): Specification | CreativeWork {
     return dataset
-      .usingType(SpecificationShapeType) // TODO: handle primers
+      .usingType(SpecificationShapeType)
       .fromSubject(id)
   }
 
   function getProductClasses(): ClassOfProduct[] {
-    return dataset
+    return [...dataset
       .usingType(ClassOfProductShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.ClassOfProduct)
+      .matchSubject(ns.rdf.type, ns.ex.ClassOfProduct)]
   }
 
   function getScopes(): any[] { // Scope[] {
@@ -153,9 +151,9 @@ export function useLdo() {
   }
 
   function getApplications(): Software[] {
-    return filterApplications(dataset
+    return filterApplications([...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Software))
+      .matchSubject(ns.rdf.type, ns.ex.Software)])
   }
 
   function filterModules(list: Software[]): Software[] {
@@ -163,19 +161,19 @@ export function useLdo() {
   }
 
   function getModules(): Software[] {
-    return filterModules(dataset
+    return filterModules([...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Software))
+      .matchSubject(ns.rdf.type, ns.ex.Software)])
   }
 
   function filterServices(list: Software[]): Software[] {
-    return list.filter(software => dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.Server)).size)
+    return list.filter(software => dataset.match(dataFactory.namedNode(software['@id']), dataFactory.namedNode(ns.ex.subType), dataFactory.namedNode(ns.con.PodServer)).size)
   }
 
   function getServices(): Software[] {
-    return filterServices(dataset
+    return filterServices([...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.rdf.type, ns.ex.Software))
+      .matchSubject(ns.rdf.type, ns.ex.Software)])
   }
 
   function getImplementation(id: string): Software {
@@ -185,9 +183,9 @@ export function useLdo() {
   }
 
   function getPapers(): CreativeWork[] {
-    return dataset
+    return [...dataset
       .usingType(CreativeWorkShapeType)
-      .matchSubject(ns.ex.subType, ns.con.ResearchPaper)
+      .matchSubject(ns.ex.subType, ns.con.ResearchPaper)]
   }
 
   function getPaper(id: string): CreativeWork {
@@ -197,10 +195,10 @@ export function useLdo() {
   }
 
   function getPapersForDraft(id: string): CreativeWork[] {
-    return dataset
+    return [...dataset
       .usingType(CreativeWorkShapeType)
-      .matchSubject(ns.ex.about, id)
-      .filter(work => work.subType.find((t: IRI) => t['@id'] === ns.con.ResearchPaper))
+      .matchSubject(ns.ex.about, id)]
+      .filter(work => [...work.subType].find((t: IRI) => t['@id'] === 'ResearchPaper'))
   }
 
   function getDraftsForPerson(id: string): Specification[] {
@@ -245,55 +243,55 @@ export function useLdo() {
   }
 
   function getSpecificationForProduct(id: string): Specification {
-    return dataset
+    return [...dataset
       .usingType(SpecificationShapeType)
-      .matchSubject(ns.ex.definesConformanceFor, id)[0]
+      .matchSubject(ns.ex.definesConformanceFor, id)][0]
   }
 
   function getPrimersForSpecification(id: string): CreativeWork[] {
-    return dataset
+    return [...dataset
       .usingType(CreativeWorkShapeType)
-      .matchSubject(ns.ex.about, id)
-      .filter(work => work.subType.find((t: IRI) => t['@id'] === ns.con.Primer))
+      .matchSubject(ns.ex.about, id)]
+      .filter(work => [...work.subType].find((t: IRI) => t['@id'] === 'Primer'))
   }
 
   function getImplementationsForProduct(id: string): Software[] {
-    return dataset
+    return [...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.ex.conformsTo, id)
+      .matchSubject(ns.ex.conformsTo, id)]
   }
 
   function getNonModulesForProduct(id: string): Software[] {
-    return filterServices(dataset
+    return filterServices([...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.ex.conformsTo, id))
+      .matchSubject(ns.ex.conformsTo, id)])
   }
 
   function getModulesForProduct(id: string): Software[] {
-    return filterModules(dataset
+    return filterModules([...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.ex.conformsTo, id))
+      .matchSubject(ns.ex.conformsTo, id)])
   }
 
   function getApplicationsForModule(id: string): Software[] {
-    return dataset
+    return [...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.ex.hasDependencyOn, id)
+      .matchSubject(ns.ex.hasDependencyOn, id)]
   }
 
   function getApplicationsForScope(id: string): Software[] {
-    return dataset
+    return [...dataset
       .usingType(SoftwareShapeType)
-      .matchSubject(ns.ex.accesses, id)
+      .matchSubject(ns.ex.accesses, id)]
   }
 
   function draftIcon(draft: Specification | CreativeWork) {
     // @ts-expect-error
-    if (draft?.subType.find((t: IRI) => t['@id'] === ns.con.Primer)) {
+    if ([...draft.subType].find((t: IRI) => t['@id'] === 'Primer')) {
       return 'mdi-information-outline'
     }
     // @ts-expect-error
-    if (draft.type.find((t: IRI) => t['@id'] === 'Specification')) {
+    if (draft.type['@id'] === 'Specification') {
       return 'mdi-alert-box-outline'
     }
     return 'mdi-help-box-outline'
@@ -345,39 +343,37 @@ export function useLdo() {
   }
 
   function implementationTypeIcon(implementation: Software) {
-    // @ts-expect-error
-    if (implementation.type.find((t: IRI) => t['@id'] === ns.ex.Module)) {
+    if ([...implementation.subType].find((t: IRI) => t['@id'] === 'SoftwareLibrary')) {
       return implementationIcon(implementation)
     }
-    // @ts-expect-error
-    if (implementation.type.find((t: IRI) => t['@id'] === ns.ex.Application)) {
+    // TODO: add other app categories
+    if ([...implementation.subType].find((t: IRI) => t['@id'] === 'OtherApp')) {
       return 'mdi-cellphone'
     }
-    // @ts-expect-error
-    if (implementation.type.find((t: IRI) => t['@id'] === ns.ex.Service)) {
+    if ([...implementation.subType].find((t: IRI) => t['@id'] === 'PodServer')) {
       return 'mdi-server'
     }
     return 'mdi-help-box-outline'
   }
 
   function isEditor(draft: Specification | CreativeWork, person: Person) {
-    // @ts-expect-error
-    return draft.editor.find((p: Person) => p['@id'] === person['@id'])
+    //@ts-expect-error
+    return [...draft.editor!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function isAuthor(draft: Specification | CreativeWork, person: Person) {
-    // @ts-expect-error
-    return draft.author.find((p: Person) => p['@id'] === person['@id'])
+    //@ts-expect-error
+    return [...draft.author!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function isMaintainer(impl: Software, person: Person) {
-    // @ts-expect-error
-    return impl.maintainer.find((p: Person) => p['@id'] === person['@id'])
+    //@ts-expect-error
+    return [...impl.maintainer!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function isContributor(impl: Software, person: Person) {
-    // @ts-expect-error
-    return impl.developer.find((p: Person) => p['@id'] === person['@id'])
+    //@ts-expect-error
+    return [...impl.developer!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function getCoverage(id: string): number {
@@ -390,22 +386,20 @@ export function useLdo() {
 
   function show(entity: LdoBase): void {
     let name: string = 'not-found'
-    if (entity.type['@id'] === 'Person' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Person')) {
+    const types = entity.type.size ? [...entity.type] : [entity.type]
+    if (types.find((t: IRI) => t['@id'] === 'Person')) {
       name = 'person'
     }
-    if (entity.type?.find((t: IRI) => t['@id'] === 'Specification') || entity.subType?.find((t: IRI) => t['@id'] === ns.con.Primer)) {
+    if (types.find((t: IRI) => t['@id'] === 'Specification') || [...entity.subType].find(c => c['@id'] === 'Primer')) {
       name = 'draft'
     }
-    if (entity.type['@id'] === 'Software' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Software')) {
+    if (types.find((t: IRI) => t['@id'] === 'Software')) {
       name = 'implementation'
     }
-    if (entity.type['@id']?.includes('ClassOfProduct') || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'].includes('ClassOfProduct'))) {
+    if (types.find((t: IRI) => t['@id'] === ns.ex.ClassOfProduct)) {
       name = 'product'
     }
-    if (entity.type['@id'] === 'Scope' || Array.isArray(entity.type) && entity.type.find((t: IRI) => t['@id'] === 'Scope')) {
-      name = 'scope'
-    }
-    if (entity.subType?.find((t: IRI) => t['@id'] === ns.con.ResearchPaper)) {
+    if ([...entity.subType].find(c => c['@id'] === 'ResearchPaper')) {
       name = 'paper'
     }
     router.push({ name, query: { id: entity['@id'] } })

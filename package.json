@@ -4,23 +4,25 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build:ldo": "ldo build --input ./src --output ./src/ldo",
+    "build:ldo": "npx -q @ldo/cli build --input ./src --output ./src/ldo",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@janeirodigital/interop-utils": "1.0.0-rc.24",
-    "@ldo/ldo": "0.0.1-alpha.24",
+    "@ldo/ldo": "1.0.0-alpha.28",
     "@mdi/font": "6.2.95",
     "@rdfjs/data-model": "^2.1.0",
     "core-js": "^3.34.0",
+    "rdf-vocabulary": "^1.0.1",
     "roboto-fontface": "*",
     "vue": "^3.4.21",
     "vuetify": "^3.5.8"
   },
   "devDependencies": {
     "@babel/types": "^7.24.0",
-    "@ldo/cli": "0.0.1-alpha.24",
+    "@ldo/cli": "1.0.0-alpha.28",
+    "@ldo/jsonld-dataset-proxy": "1.0.0-alpha.28",
     "@rdfjs/types": "^2.0.1",
     "@types/jsonld": "^1.5.14",
     "@types/node": "^20.11.25",

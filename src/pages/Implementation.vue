@@ -4,7 +4,7 @@
     <draft-list-item :draft="impl" :icon="ldo.implementationTypeIcon(impl)" @click="ldo.show(impl)">
     </draft-list-item>
 
-    <section v-if="impl.conformsTo!.length">
+    <section v-if="impl.conformsTo!.size">
       <h4>Implements</h4>
       <v-table>
         <thead>
@@ -35,7 +35,7 @@
         </tbody>
       </v-table>
     </section>
-    <section v-if="impl.hasDependencyOn!.length">
+    <section v-if="impl.hasDependencyOn!.size">
       <v-table>
         <thead>
           <tr>
@@ -48,7 +48,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dependency of impl.hasDependencyOn as Software[]">
+          <tr v-for="dependency of impl.hasDependencyOn as LdSet<Software>">
             <td>
               <draft-list-item :draft="dependency" :icon="ldo.implementationIcon(dependency)"
                 @click="ldo.show(dependency)">
@@ -84,6 +84,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useLdo } from '@/ldo';
+import type { LdSet } from '@ldo/jsonld-dataset-proxy';
 import { Software } from '@/ldo/shapes.typings';
 
 const route = useRoute()

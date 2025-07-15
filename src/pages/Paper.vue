@@ -8,16 +8,12 @@
       {{ paper.description }}
     </section>
 
-    <section v-if="paper.about">
+    <section v-if="(paper as CreativeWork).about!.size">
       <h4>References</h4>
-      <v-list v-if="(paper.about as unknown as []).length">
+      <v-list>
         <draft-list-item v-for="specification of paper.about" :draft="specification"
           :icon="ldo.draftIcon(specification as unknown as Specification)"
           @click="ldo.show(specification as unknown as LdoBase)"></draft-list-item>
-      </v-list>
-      <v-list v-else>
-        <draft-list-item :draft="paper.about" :icon="ldo.draftIcon(paper.about as unknown as Specification)"
-          @click="ldo.show(paper.about as unknown as LdoBase)"></draft-list-item>
       </v-list>
     </section>
 
@@ -33,7 +29,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useLdo } from '@/ldo';
 import { LdoBase } from '@ldo/ldo';
-import { Specification } from '@/ldo/shapes.typings';
+import { Specification, CreativeWork } from '@/ldo/shapes.typings';
 
 const route = useRoute()
 const ldo = useLdo()
