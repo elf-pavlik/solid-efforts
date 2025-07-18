@@ -9,7 +9,6 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@janeirodigital/interop-utils": "1.0.0-rc.24",
     "@ldo/ldo": "1.0.0-alpha.28",
     "@mdi/font": "6.2.95",
     "@rdfjs/data-model": "^2.1.0",

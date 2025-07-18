@@ -1,14 +1,11 @@
 import { ref, shallowRef } from "vue"
 import { useRouter } from "vue-router";
-import { LdoBase, LdoDataset } from "@ldo/ldo";
+import { LdoBase, LdoDataset, parseRdf } from "@ldo/ldo";
 import { createVocabulary } from 'rdf-vocabulary'
-import { createLdoDataset } from '@ldo/ldo';
-import { parseJsonld } from '@janeirodigital/interop-utils';
 // @ts-ignore
 import dataFactory from '@rdfjs/data-model'
 import { SpecificationShapeType, SoftwareShapeType, PersonShapeType, ClassOfProductShapeType, CreativeWorkShapeType } from '@/ldo/shapes.shapeTypes'
 import type { Specification, Software, Person, ClassOfProduct, CreativeWork } from '@/ldo/shapes.typings';
-import data from "./data.json"
 
 export type IRI = { '@id': string }
 
@@ -80,10 +77,10 @@ export function useLdo() {
 
   async function createDataset(): Promise<void> {
     if (dataset) return
-    // const response = await fetch('https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl', { headers: { Accept: 'application/ld+json' } })
-    // const rawDataset = await parseJsonld(await response.text())
-    const rawDataset = await parseJsonld(JSON.stringify(data))
-    dataset = createLdoDataset([...rawDataset])
+    //const catalogUrl = 'https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl'
+    const catalogUrl = 'http://localhost:8000/catalog-data.ttl'
+    const response = await fetch(catalogUrl, { headers: { Accept: 'text/turtle' } })
+    dataset = await parseRdf(await response.text())
   }
 
   function filterPeople(list: Person[]): Person[] {
