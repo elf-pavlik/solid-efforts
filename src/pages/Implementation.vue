@@ -1,10 +1,10 @@
 <template>
   <v-responsive class="align-centerfill-height mx-auto" max-width="980" min-height="100%">
     <page-header></page-header>
-    <draft-list-item :draft="impl" :icon="ldo.implementationTypeIcon(impl)" @click="ldo.show(impl)">
+    <draft-list-item :draft="resource" :icon="ldo.implementationTypeIcon(resource)" @click="ldo.show(resource)">
     </draft-list-item>
 
-    <section v-if="impl.conformsTo!.size">
+    <section v-if="resource.conformsTo!.size">
       <h4>Implements</h4>
       <v-table>
         <thead>
@@ -18,13 +18,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product of impl.conformsTo">
+          <tr v-for="product of resource.conformsTo">
             <td>
               <draft-list-item :draft="product" icon="mdi-star-box-outline"
                 @click="ldo.show(product)"></draft-list-item>
             </td>
             <td>
-              <v-progress-linear :model-value="ldo.getConformance(impl['@id']!, product['@id']!)"
+              <v-progress-linear :model-value="ldo.getConformance(resource['@id']!, product['@id']!)"
                 :buffer-value="ldo.getCoverage(product['@id']!)" color="green" height="25">
                 <template v-slot:default="{ value }">
                   <strong>{{ Math.round(value) }}%</strong>
@@ -35,7 +35,7 @@
         </tbody>
       </v-table>
     </section>
-    <section v-if="impl.hasDependencyOn!.size">
+    <section v-if="resource.hasDependencyOn!.size">
       <v-table>
         <thead>
           <tr>
@@ -48,7 +48,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dependency of impl.hasDependencyOn as LdSet<Software>">
+          <tr v-for="dependency of resource.hasDependencyOn as LdSet<Software>">
             <td>
               <draft-list-item :draft="dependency" :icon="ldo.implementationIcon(dependency)"
                 @click="ldo.show(dependency)">
@@ -70,18 +70,24 @@
         :icon="ldo.implementationTypeIcon(application)" @click="ldo.show(application)">
       </draft-list-item>
     </section>
+    <section>
     <h4>Maintainers</h4>
-    <person-list-item v-for="person of impl.maintainer" :person="person" @click="ldo.show(person)">
-    </person-list-item>
+      <v-btn v-if="editMode" color="primary" @click="openEditor('maintainer', 'Maintainers')">🔗</v-btn>
+      <person-list-item v-for="person of resource.maintainer" :person="person" @click="ldo.show(person)">
+      </person-list-item>
+    </section>
+    <section>
     <h4>Contributors</h4>
-    <person-list-item v-for="person of impl.developer" :person="person" @click="ldo.show(person)">
-    </person-list-item>
+      <v-btn v-if="editMode" color="primary" @click="openEditor('developer', 'Contributors')">🔗</v-btn>
+      <person-list-item v-for="person of resource.developer" :person="person" @click="ldo.show(person)">
+      </person-list-item>
+    </section>
 
   </v-responsive>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useLdo } from '@/ldo';
 import type { LdSet } from '@ldo/jsonld-dataset-proxy';
@@ -89,10 +95,14 @@ import { Software } from '@/ldo/shapes.typings';
 
 const route = useRoute()
 const ldo = useLdo()
-
 await ldo.createDataset()
+const { editMode, resource, openEditor } = ldo
 
-const impl = computed(() => ldo.getImplementation(route.query.id as string))
+
+watch(route, () => {
+  resource.value = ldo.getImplementation(route.query.id as string)
+}, { immediate: true })
+
 const applications = computed(() => ldo.getApplicationsForModule(route.query.id as string))
 
 </script>

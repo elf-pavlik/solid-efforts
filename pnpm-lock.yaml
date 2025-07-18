@@ -11,6 +11,9 @@ importers:
       '@ldo/ldo':
         specifier: 1.0.0-alpha.28
         version: 1.0.0-alpha.28
+      '@ldo/rdf-utils':
+        specifier: 1.0.0-alpha.28
+        version: 1.0.0-alpha.28
       '@mdi/font':
         specifier: 6.2.95
         version: 6.2.95

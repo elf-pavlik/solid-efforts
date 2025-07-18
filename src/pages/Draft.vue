@@ -38,13 +38,13 @@
 
     <section>
       <h4>Editors</h4>
-      <v-btn color="primary" @click="openEditor('editor')">🔗</v-btn>
+      <v-btn v-if="editMode" color="primary" @click="openEditor('editor', 'Editors')">🔗</v-btn>
       <person-list-item v-for="person of resource.editor" :person="person" @click="ldo.show(person)"></person-list-item>
     </section>
 
     <section>
       <h4>Authors</h4>
-      <v-btn color="primary" @click="openEditor('author')">🔗</v-btn>
+      <v-btn v-if="editMode" color="primary" @click="openEditor('author', 'Authors')">🔗</v-btn>
       <person-list-item v-for="person of resource.author" :person="person" @click="ldo.show(person)"></person-list-item>
     </section>
   </v-responsive>
@@ -58,15 +58,9 @@ import { CreativeWork, Specification } from '@/ldo/shapes.typings';
 
 const route = useRoute()
 const ldo = useLdo()
-const { editor, resource, editorProperty, editorOptions } = ldo
-
-function openEditor(prop: string) {
-  editor.value = true
-  editorProperty.value = prop
-  editorOptions.value = ldo.getPeople()
-}
-
 await ldo.createDataset()
+const { editMode, resource, openEditor } = ldo
+
 
 watch(route, () => {
   resource.value = ldo.getDraft(route.query.id as string)

@@ -74,6 +74,13 @@
         </v-tabs-window-item>
       </v-tabs-window>
     </div>
+    <div v-if="!editMode">
+      <v-btn color="primary" @click="startEdit()">✏️</v-btn>
+    </div>
+    <div v-else>
+      <v-btn color="error" @click="abortEdit()">❌</v-btn>
+      <v-btn color="secondary" @click="exportFile()">⬇️</v-btn>
+    </div>
   </v-responsive>
 </template>
 
@@ -85,8 +92,9 @@ import { useLdo } from '@/ldo'
 const router = useRouter()
 const route = useRoute()
 const ldo = useLdo()
-
 await ldo.createDataset()
+const { editMode, startEdit, exportFile, abortEdit } = ldo
+
 
 const defaultTab = 'people'
 const tab = ref(route.query.tab as string || defaultTab)

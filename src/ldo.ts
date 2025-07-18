@@ -1,6 +1,7 @@
 import { ref, shallowRef } from "vue"
 import { useRouter } from "vue-router";
-import { LdoBase, LdoDataset, parseRdf } from "@ldo/ldo";
+import { LdoBase, LdoDataset, getDataset, parseRdf } from "@ldo/ldo";
+import { datasetToString } from "@ldo/rdf-utils"
 import { createVocabulary } from 'rdf-vocabulary'
 // @ts-ignore
 import dataFactory from '@rdfjs/data-model'
@@ -13,11 +14,13 @@ export function robohash(id: string) {
   return `https://robohash.org/${encodeURIComponent(id)}.png?set=set3`
 }
 
+const editMode = ref(!!localStorage.data)
 const editor = ref(false)
 const resource = shallowRef()
 const editorProperty = ref()
-const editorOptions = ref([])
-const editorSelected = shallowRef([])
+const editorTitle = ref()
+const editorOptions = ref<any[]>([])
+const editorSelected = shallowRef<any[]>([])
 
 export function useLdo() {
 
@@ -75,12 +78,97 @@ export function useLdo() {
 
   let dataset: LdoDataset
 
-  async function createDataset(): Promise<void> {
-    if (dataset) return
-    //const catalogUrl = 'https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl'
-    const catalogUrl = 'http://localhost:8000/catalog-data.ttl'
+  async function fetchCatalog(): Promise<string> {
+    const catalogUrl = 'https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl'
     const response = await fetch(catalogUrl, { headers: { Accept: 'text/turtle' } })
-    dataset = await parseRdf(await response.text())
+    return response.text()
+  }
+
+  async function createDataset(force = false): Promise<void> {
+    if (!force && dataset) return
+    const catalogTtl = localStorage.data ?? await fetchCatalog()
+    dataset = await parseRdf(catalogTtl)
+  }
+
+  async function startEdit() {
+    try {
+      // Open file picker
+      // @ts-ignore
+      const [fileHandle] = await window.showOpenFilePicker({
+        types: [
+          {
+            description: "Data",
+            accept: {
+              "text/turtle": [".ttl"],
+            },
+          },
+        ],
+      });
+
+      // Get file contents
+      const file = await fileHandle.getFile();
+      const contents = await file.text();
+      dataset = await parseRdf(contents)
+      localStorage.setItem('data', contents)
+      editMode.value = true
+    } catch (err) {
+      // @ts-ignore
+      if (err.name !== 'AbortError') {
+        console.warn('User cancelled');
+        console.error(err);
+      }
+    }
+  }
+
+  async function abortEdit() {
+    localStorage.removeItem('data')
+    editMode.value = false
+    await createDataset(true)
+  }
+
+
+  function openEditor(prop: string, title: string) {
+    editor.value = true
+    editorProperty.value = prop
+    editorTitle.value = title
+    // TODO: generalize
+    editorOptions.value = getPeople()
+  }
+
+  function saveFile() {
+    const catalogTtl = datasetToString(getDataset(resource.value), { format: 'Turtle' })
+    localStorage.setItem('data', catalogTtl)
+  }
+
+  async function exportFile() {
+    try {
+      // Create a new file handle
+      // @ts-ignore
+      const handle = await window.showSaveFilePicker({
+        suggestedName: 'catalog-data.ttl',
+        types: [{
+          description: 'Data',
+          accept: { 'text/turtle': ['.ttl'] },
+        }],
+      });
+
+      // Create a FileSystemWritableFileStream to write to
+      const writable = await handle.createWritable();
+
+      // Write the content
+      const content = datasetToString(getDataset(resource.value), { format: 'Turtle' })
+      await writable.write(content);
+
+      // Close the file
+      await writable.close();
+    } catch (err) {
+      // @ts-ignore
+      if (err.name === 'AbortError') {
+        console.warn('User cancelled');
+        return; // User cancelled
+      }
+      console.error('Error saving file:', err);
+    }
   }
 
   function filterPeople(list: Person[]): Person[] {
@@ -410,11 +498,18 @@ export function useLdo() {
   }
 
   return {
+    editMode,
     editor,
     resource,
     editorProperty,
+    editorTitle,
     editorOptions,
     editorSelected,
+    startEdit,
+    abortEdit,
+    openEditor,
+    saveFile,
+    exportFile,
     createDataset,
     getPeople,
     getPerson,
