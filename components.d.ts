@@ -11,6 +11,7 @@ declare module 'vue' {
     AppListItem: typeof import('./src/components/AppListItem.vue')['default']
     DraftListItem: typeof import('./src/components/DraftListItem.vue')['default']
     DraftTable: typeof import('./src/components/DraftTable.vue')['default']
+    Editor: typeof import('./src/components/Editor.vue')['default']
     ImplementationTable: typeof import('./src/components/ImplementationTable.vue')['default']
     ModuleDependentsTable: typeof import('./src/components/ModuleDependentsTable.vue')['default']
     PageHeader: typeof import('./src/components/PageHeader.vue')['default']

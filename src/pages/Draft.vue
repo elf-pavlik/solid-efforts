@@ -1,18 +1,18 @@
 <template>
   <v-responsive class="align-centerfill-height mx-auto" max-width="1200" min-height="100%">
     <page-header></page-header>
-    <draft-list-item :draft="draft" :icon="ldo.draftIcon(draft)" @click="ldo.show(draft)">
+    <draft-list-item :draft="resource" :icon="ldo.draftIcon(resource)" @click="ldo.show(resource)">
     </draft-list-item>
 
-    <section v-if="(draft as Specification).definesConformanceFor!.size">
+    <section v-if="(resource as Specification).definesConformanceFor!.size">
       <product-implementations-table
-        :products="(draft as Specification).definesConformanceFor"></product-implementations-table>
+        :products="[...(resource as Specification).definesConformanceFor]"></product-implementations-table>
     </section>
 
-    <section v-if="(draft as CreativeWork).about!.size">
+    <section v-if="(resource as CreativeWork).about!.size">
       <h4>Explains</h4>
       <v-list>
-        <draft-list-item v-for="specification of (draft as CreativeWork).about" :draft="specification"
+        <draft-list-item v-for="specification of (resource as CreativeWork).about" :draft="specification"
           :icon="ldo.draftIcon(specification as unknown as Specification)"
           @click="ldo.show(specification)"></draft-list-item>
       </v-list>
@@ -38,28 +38,40 @@
 
     <section>
       <h4>Editors</h4>
-      <person-list-item v-for="person of draft.editor" :person="person" @click="ldo.show(person)"></person-list-item>
+      <v-btn color="primary" @click="openEditor('editor')">🔗</v-btn>
+      <person-list-item v-for="person of resource.editor" :person="person" @click="ldo.show(person)"></person-list-item>
     </section>
 
     <section>
       <h4>Authors</h4>
-      <person-list-item v-for="person of draft.author" :person="person" @click="ldo.show(person)"></person-list-item>
+      <v-btn color="primary" @click="openEditor('author')">🔗</v-btn>
+      <person-list-item v-for="person of resource.author" :person="person" @click="ldo.show(person)"></person-list-item>
     </section>
   </v-responsive>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useLdo } from '@/ldo';
 import { CreativeWork, Specification } from '@/ldo/shapes.typings';
 
 const route = useRoute()
 const ldo = useLdo()
+const { editor, resource, editorProperty, editorOptions } = ldo
+
+function openEditor(prop: string) {
+  editor.value = true
+  editorProperty.value = prop
+  editorOptions.value = ldo.getPeople()
+}
 
 await ldo.createDataset()
 
-const draft = computed(() => ldo.getDraft(route.query.id as string))
+watch(route, () => {
+  resource.value = ldo.getDraft(route.query.id as string)
+}, { immediate: true })
+
 const primers = computed(() => ldo.getPrimersForSpecification(route.query.id as string))
 const papers = computed(() => ldo.getPapersForDraft(route.query.id as string))
 </script>

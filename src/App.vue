@@ -3,11 +3,12 @@
     <v-main>
       <router-view />
     </v-main>
+    <Editor></Editor>
   </v-app>
 </template>
 
 <script lang="ts" setup>
-  //
+  import Editor from '@/components/Editor.vue'
 </script>
 
 <style>

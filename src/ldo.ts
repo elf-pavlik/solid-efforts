@@ -1,3 +1,4 @@
+import { ref, shallowRef } from "vue"
 import { useRouter } from "vue-router";
 import { LdoBase, LdoDataset } from "@ldo/ldo";
 import { createVocabulary } from 'rdf-vocabulary'
@@ -14,6 +15,12 @@ export type IRI = { '@id': string }
 export function robohash(id: string) {
   return `https://robohash.org/${encodeURIComponent(id)}.png?set=set3`
 }
+
+const editor = ref(false)
+const resource = shallowRef()
+const editorProperty = ref()
+const editorOptions = ref([])
+const editorSelected = shallowRef([])
 
 export function useLdo() {
 
@@ -406,6 +413,11 @@ export function useLdo() {
   }
 
   return {
+    editor,
+    resource,
+    editorProperty,
+    editorOptions,
+    editorSelected,
     createDataset,
     getPeople,
     getPerson,
