@@ -22,6 +22,8 @@ const editorTitle = ref()
 const editorOptions = ref<any[]>([])
 const editorSelected = shallowRef<any[]>([])
 
+let dataset: LdoDataset
+
 export function useLdo() {
 
   const router = useRouter()
@@ -76,8 +78,6 @@ export function useLdo() {
     }
   }
 
-  let dataset: LdoDataset
-
   async function fetchCatalog(): Promise<string> {
     const catalogUrl = 'https://solidproject.solidcommunity.net/catalog/v2/catalog-data.ttl'
     const response = await fetch(catalogUrl, { headers: { Accept: 'text/turtle' } })
@@ -88,6 +88,16 @@ export function useLdo() {
     if (!force && dataset) return
     const catalogTtl = localStorage.data ?? await fetchCatalog()
     dataset = await parseRdf(catalogTtl)
+  }
+
+  // TODO: generalize for other types
+  function addResource(name: string): LdoBase {
+    const id = `urn:uuid:${crypto.randomUUID()}`
+    const added = dataset.usingType(PersonShapeType).fromSubject(id)
+    added.name = name
+    // @ts-ignore
+    added.type.add({ '@id': 'Person' })
+    return added
   }
 
   async function startEdit() {
@@ -505,6 +515,7 @@ export function useLdo() {
     editorTitle,
     editorOptions,
     editorSelected,
+    addResource,
     startEdit,
     abortEdit,
     openEditor,

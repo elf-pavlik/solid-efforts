@@ -37,16 +37,34 @@
         </template>
       </v-autocomplete>
       <v-card-actions>
-        <v-btn color="secondary" @click="editor = false">✅</v-btn>
+        <v-btn @click="editor = false">✅</v-btn>
+        <v-btn @click="add = true">➕</v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-card
+      v-if="add"
+      title="Add"
+    >
+      <v-text-field
+        label="name"
+        v-model="name"
+        :rules="[required]"
+      ></v-text-field>
+      <v-card-actions>
+        <v-btn @click="doAdd()" :disabled="!name">✅</v-btn>
+        <v-btn @click="resetAdd()">❌</v-btn>
       </v-card-actions>
     </v-card>
   </v-overlay>
 </template>
 <script setup lang="ts">
-import { watch, triggerRef } from 'vue';
+import { ref, watch, triggerRef } from 'vue';
 import { useLdo } from '@/ldo';
 
-const { editor, resource, editorProperty, editorOptions, editorSelected, saveFile } = useLdo()
+const { editor, resource, editorProperty, editorOptions, editorSelected, addResource, saveFile } = useLdo()
+
+const add = ref(false)
+const name = ref('')
 
 watch([resource, editorProperty], () => {
   if (!resource.value || !editorProperty.value) return
@@ -61,4 +79,18 @@ function updateSelected(val: any) {
   }
   triggerRef(resource)
 }
+
+function doAdd() {
+  const added = addResource(name.value)
+  resource.value[editorProperty.value].add(added)
+  triggerRef(resource)
+  resetAdd()
+}
+
+function resetAdd() {
+  name.value = ''
+  add.value = false
+}
+
+const required = (value: string) => !!value || 'name is required'
 </script>
