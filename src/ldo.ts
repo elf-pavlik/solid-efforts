@@ -459,22 +459,18 @@ export function useLdo() {
   }
 
   function isEditor(draft: Specification | CreativeWork, person: Person) {
-    //@ts-expect-error
     return [...draft.editor!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function isAuthor(draft: Specification | CreativeWork, person: Person) {
-    //@ts-expect-error
     return [...draft.author!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function isMaintainer(impl: Software, person: Person) {
-    //@ts-expect-error
     return [...impl.maintainer!].find((p: Person) => p['@id'] === person['@id'])
   }
 
   function isContributor(impl: Software, person: Person) {
-    //@ts-expect-error
     return [...impl.developer!].find((p: Person) => p['@id'] === person['@id'])
   }
 
@@ -498,7 +494,7 @@ export function useLdo() {
     if (types.find((t: IRI) => t['@id'] === 'Software')) {
       name = 'implementation'
     }
-    if (types.find((t: IRI) => t['@id'] === ns.ex.ClassOfProduct)) {
+    if (types.find((t: IRI) => t['@id'] === 'ClassOfProduct')) {
       name = 'product'
     }
     if ([...entity.subType].find(c => c['@id'] === 'ResearchPaper')) {
