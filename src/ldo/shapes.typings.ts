@@ -37,6 +37,9 @@ export interface SolidResource {
     | {
         "@id": "Ontology";
       }
+    | {
+        "@id": "ClassOfProduct";
+      }
   >;
 }
 
@@ -71,19 +74,84 @@ export interface CreativeWork {
     "@id": string;
   }>;
   technicalKeyword?: LdSet<string>;
-  landingPage?: {
+  landingPage?: LdSet<{
+    "@id": string;
+  }>;
+  provider?: LdSet<Organization>;
+  author?: LdSet<Person>;
+  editor?: LdSet<Person>;
+  description?: string;
+}
+
+/**
+ * Organization Type
+ */
+export interface Organization {
+  "@id"?: string;
+  "@context"?: LdoJsonldContext;
+  name: string;
+  subType: LdSet<
+    | {
+        "@id": "Company";
+      }
+    | {
+        "@id": "GovernmentalOrganization";
+      }
+    | {
+        "@id": "UniversityProject";
+      }
+    | {
+        "@id": "OpenSourceProject";
+      }
+    | {
+        "@id": "FundingOrganization";
+      }
+    | {
+        "@id": "OtherNGO";
+      }
+  >;
+  contactEmail?: {
     "@id": string;
   };
-  provider?: LdSet<{
-    "@id": string;
-  }>;
-  author?: LdSet<{
-    "@id": string;
-  }>;
-  editor?: LdSet<{
-    "@id": string;
-  }>;
   description?: string;
+  logo?: {
+    "@id": string;
+  };
+  webid?: {
+    "@id": string;
+  };
+  landingPage?: LdSet<{
+    "@id": string;
+  }>;
+  socialKeyword?: LdSet<string>;
+  resourcesWanted?: LdSet<string>;
+  resourcesOffered?: LdSet<string>;
+}
+
+/**
+ * Person Type
+ */
+export interface Person {
+  "@id"?: string;
+  "@context"?: LdoJsonldContext;
+  name: string;
+  contactEmail?: {
+    "@id": string;
+  };
+  webid?: {
+    "@id": string;
+  };
+  forumHandle?: string;
+  matrixHandle?: string;
+  description?: string;
+  logo?: {
+    "@id": string;
+  };
+  landingPage?: LdSet<{
+    "@id": string;
+  }>;
+  resourcesWanted?: LdSet<string>;
+  resourcesOffered?: LdSet<string>;
 }
 
 /**
@@ -94,16 +162,14 @@ export interface Event {
   "@context"?: LdoJsonldContext;
   name: string;
   description?: string;
-  provider?: LdSet<{
-    "@id": string;
-  }>;
+  provider?: LdSet<Organization>;
   schedule?: string;
   videoCallPage?: {
     "@id": string;
   };
-  landingPage?: {
+  landingPage?: LdSet<{
     "@id": string;
-  };
+  }>;
 }
 
 /**
@@ -141,22 +207,20 @@ export interface Service {
         "@id": "Archived";
       };
   description?: string;
-  contactEmail?: string;
+  contactEmail?: {
+    "@id": string;
+  };
   logo?: {
     "@id": string;
   };
   serviceEndpoint?: {
     "@id": string;
   };
-  landingPage?: {
-    "@id": string;
-  };
-  softwareStackIncludes?: LdSet<{
+  landingPage?: LdSet<{
     "@id": string;
   }>;
-  provider?: LdSet<{
-    "@id": string;
-  }>;
+  softwareStackIncludes?: LdSet<Software>;
+  provider?: LdSet<Organization>;
   socialKeyword?: LdSet<string>;
   serviceAudience?: string;
 }
@@ -204,7 +268,9 @@ export interface Software {
     | {
         "@id": "Archived";
       };
-  contactEmail?: string;
+  contactEmail?: {
+    "@id": string;
+  };
   description?: string;
   clientID?: {
     "@id": string;
@@ -212,60 +278,22 @@ export interface Software {
   logo?: {
     "@id": string;
   };
-  landingPage?: {
+  landingPage?: LdSet<{
     "@id": string;
-  };
+  }>;
   repository?: {
     "@id": string;
   };
   showcase?: {
     "@id": string;
   };
-  provider?: LdSet<{
-    "@id": string;
-  }>;
-  maintainer?: LdSet<{
-    "@id": string;
-  }>;
-  developer?: LdSet<{
-    "@id": string;
-  }>;
+  provider?: LdSet<Organization>;
+  maintainer?: LdSet<Person>;
+  developer?: LdSet<Person>;
   socialKeyword?: LdSet<string>;
   technicalKeyword?: LdSet<string>;
-  conformsTo?: LdSet<{
-    "@id": string;
-  }>;
-  hasDependencyOn?: LdSet<{
-    "@id": string;
-  }>;
-}
-
-/**
- * Specification Type
- */
-export interface Specification {
-  "@id"?: string;
-  "@context"?: LdoJsonldContext;
-  type: LdSet<{
-    "@id": "Specification";
-  }>;
-  name: string;
-  description?: string;
-  repository?: {
-    "@id": string;
-  };
-  landingPage?: {
-    "@id": string;
-  };
-  editor?: LdSet<{
-    "@id": string;
-  }>;
-  author?: LdSet<{
-    "@id": string;
-  }>;
-  definesConformanceFor?: LdSet<{
-    "@id": string;
-  }>;
+  conformsTo?: LdSet<ClassOfProduct>;
+  hasDependencyOn?: LdSet<Software>;
 }
 
 /**
@@ -275,6 +303,25 @@ export interface ClassOfProduct {
   "@id"?: string;
   "@context"?: LdoJsonldContext;
   name: string;
+}
+
+/**
+ * Specification Type
+ */
+export interface Specification {
+  "@id"?: string;
+  "@context"?: LdoJsonldContext;
+  name: string;
+  description?: string;
+  repository?: {
+    "@id": string;
+  };
+  landingPage?: LdSet<{
+    "@id": string;
+  }>;
+  editor?: LdSet<Person>;
+  author?: LdSet<Person>;
+  definesConformanceFor?: LdSet<ClassOfProduct>;
 }
 
 /**
@@ -292,74 +339,7 @@ export interface Ontology {
   repository?: {
     "@id": string;
   };
-  landingPage?: {
+  landingPage?: LdSet<{
     "@id": string;
-  };
-}
-
-/**
- * Organization Type
- */
-export interface Organization {
-  "@id"?: string;
-  "@context"?: LdoJsonldContext;
-  name: string;
-  subType: LdSet<
-    | {
-        "@id": "Company";
-      }
-    | {
-        "@id": "GovernmentalOrganization";
-      }
-    | {
-        "@id": "UniversityProject";
-      }
-    | {
-        "@id": "OpenSourceProject";
-      }
-    | {
-        "@id": "FundingOrganization";
-      }
-    | {
-        "@id": "OtherNGO";
-      }
-  >;
-  contactEmail?: string;
-  description?: string;
-  logo?: {
-    "@id": string;
-  };
-  webid?: {
-    "@id": string;
-  };
-  landingPage?: {
-    "@id": string;
-  };
-  socialKeyword?: LdSet<string>;
-  resourcesWanted?: LdSet<string>;
-  resourcesOffered?: LdSet<string>;
-}
-
-/**
- * Person Type
- */
-export interface Person {
-  "@id"?: string;
-  "@context"?: LdoJsonldContext;
-  name: string;
-  contactEmail?: string;
-  webid?: {
-    "@id": string;
-  };
-  forumHandle?: string;
-  matrixHandle?: string;
-  description?: string;
-  logo?: {
-    "@id": string;
-  };
-  landingPage?: {
-    "@id": string;
-  };
-  resourcesWanted?: LdSet<string>;
-  resourcesOffered?: LdSet<string>;
+  }>;
 }

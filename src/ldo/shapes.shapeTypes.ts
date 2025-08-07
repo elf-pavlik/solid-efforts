@@ -4,14 +4,14 @@ import { shapesContext } from "./shapes.context";
 import {
   SolidResource,
   CreativeWork,
+  Organization,
+  Person,
   Event,
   Service,
   Software,
-  Specification,
   ClassOfProduct,
+  Specification,
   Ontology,
-  Organization,
-  Person,
 } from "./shapes.typings";
 
 /**
@@ -25,7 +25,8 @@ import {
  */
 export const SolidResourceShapeType: ShapeType<SolidResource> = {
   schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#SolidResource",
+  shape:
+    "https://solidproject.solidcommunity.net/catalog/shapes#SolidResourceShape",
   context: shapesContext,
 };
 
@@ -34,7 +35,27 @@ export const SolidResourceShapeType: ShapeType<SolidResource> = {
  */
 export const CreativeWorkShapeType: ShapeType<CreativeWork> = {
   schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#CreativeWork",
+  shape:
+    "https://solidproject.solidcommunity.net/catalog/shapes#CreativeWorkShape",
+  context: shapesContext,
+};
+
+/**
+ * Organization ShapeType
+ */
+export const OrganizationShapeType: ShapeType<Organization> = {
+  schema: shapesSchema,
+  shape:
+    "https://solidproject.solidcommunity.net/catalog/shapes#OrganizationShape",
+  context: shapesContext,
+};
+
+/**
+ * Person ShapeType
+ */
+export const PersonShapeType: ShapeType<Person> = {
+  schema: shapesSchema,
+  shape: "https://solidproject.solidcommunity.net/catalog/shapes#PersonShape",
   context: shapesContext,
 };
 
@@ -43,7 +64,7 @@ export const CreativeWorkShapeType: ShapeType<CreativeWork> = {
  */
 export const EventShapeType: ShapeType<Event> = {
   schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Event",
+  shape: "https://solidproject.solidcommunity.net/catalog/shapes#EventShape",
   context: shapesContext,
 };
 
@@ -52,7 +73,7 @@ export const EventShapeType: ShapeType<Event> = {
  */
 export const ServiceShapeType: ShapeType<Service> = {
   schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Service",
+  shape: "https://solidproject.solidcommunity.net/catalog/shapes#ServiceShape",
   context: shapesContext,
 };
 
@@ -61,16 +82,7 @@ export const ServiceShapeType: ShapeType<Service> = {
  */
 export const SoftwareShapeType: ShapeType<Software> = {
   schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Software",
-  context: shapesContext,
-};
-
-/**
- * Specification ShapeType
- */
-export const SpecificationShapeType: ShapeType<Specification> = {
-  schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Specification",
+  shape: "https://solidproject.solidcommunity.net/catalog/shapes#SoftwareShape",
   context: shapesContext,
 };
 
@@ -80,7 +92,17 @@ export const SpecificationShapeType: ShapeType<Specification> = {
 export const ClassOfProductShapeType: ShapeType<ClassOfProduct> = {
   schema: shapesSchema,
   shape:
-    "https://solidproject.solidcommunity.net/catalog/shapes#ClassOfProduct",
+    "https://solidproject.solidcommunity.net/catalog/shapes#ClassOfProductShape",
+  context: shapesContext,
+};
+
+/**
+ * Specification ShapeType
+ */
+export const SpecificationShapeType: ShapeType<Specification> = {
+  schema: shapesSchema,
+  shape:
+    "https://solidproject.solidcommunity.net/catalog/shapes#SpecificationShape",
   context: shapesContext,
 };
 
@@ -89,24 +111,6 @@ export const ClassOfProductShapeType: ShapeType<ClassOfProduct> = {
  */
 export const OntologyShapeType: ShapeType<Ontology> = {
   schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Ontology",
-  context: shapesContext,
-};
-
-/**
- * Organization ShapeType
- */
-export const OrganizationShapeType: ShapeType<Organization> = {
-  schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Organization",
-  context: shapesContext,
-};
-
-/**
- * Person ShapeType
- */
-export const PersonShapeType: ShapeType<Person> = {
-  schema: shapesSchema,
-  shape: "https://solidproject.solidcommunity.net/catalog/shapes#Person",
+  shape: "https://solidproject.solidcommunity.net/catalog/shapes#OntologyShape",
   context: shapesContext,
 };

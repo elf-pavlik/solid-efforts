@@ -71,41 +71,19 @@ export const shapesContext: LdoJsonldContext = {
         "@id": "@type",
         "@isCollection": true,
       },
-      name: {
-        "@id": "http://example.org#name",
-        "@type": "http://www.w3.org/2001/XMLSchema#string",
-      },
-      description: {
-        "@id": "http://example.org#description",
-        "@type": "http://www.w3.org/2001/XMLSchema#string",
-      },
-      repository: {
-        "@id": "http://example.org#repository",
-        "@type": "@id",
-      },
-      landingPage: {
-        "@id": "http://example.org#landingPage",
-        "@type": "@id",
-      },
-      editor: {
-        "@id": "http://example.org#editor",
-        "@type": "@id",
-        "@isCollection": true,
-      },
-      author: {
-        "@id": "http://example.org#author",
-        "@type": "@id",
-        "@isCollection": true,
-      },
-      definesConformanceFor: {
-        "@id": "http://example.org#definesConformanceFor",
-        "@type": "@id",
-        "@isCollection": true,
-      },
     },
   },
   Ontology: {
     "@id": "http://example.org#Ontology",
+    "@context": {
+      type: {
+        "@id": "@type",
+        "@isCollection": true,
+      },
+    },
+  },
+  ClassOfProduct: {
+    "@id": "http://example.org#ClassOfProduct",
     "@context": {
       type: {
         "@id": "@type",
@@ -145,10 +123,52 @@ export const shapesContext: LdoJsonldContext = {
   landingPage: {
     "@id": "http://example.org#landingPage",
     "@type": "@id",
+    "@isCollection": true,
   },
   provider: {
     "@id": "http://example.org#provider",
     "@type": "@id",
+    "@isCollection": true,
+  },
+  Company: "https://solidproject.solidcommunity.net/catalog/taxonomy#Company",
+  GovernmentalOrganization:
+    "https://solidproject.solidcommunity.net/catalog/taxonomy#GovernmentalOrganization",
+  UniversityProject:
+    "https://solidproject.solidcommunity.net/catalog/taxonomy#UniversityProject",
+  OpenSourceProject:
+    "https://solidproject.solidcommunity.net/catalog/taxonomy#OpenSourceProject",
+  FundingOrganization:
+    "https://solidproject.solidcommunity.net/catalog/taxonomy#FundingOrganization",
+  OtherNGO: "https://solidproject.solidcommunity.net/catalog/taxonomy#OtherNGO",
+  contactEmail: {
+    "@id": "http://example.org#contactEmail",
+    "@type": "@id",
+  },
+  description: {
+    "@id": "http://example.org#description",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
+  },
+  logo: {
+    "@id": "http://example.org#logo",
+    "@type": "@id",
+  },
+  webid: {
+    "@id": "http://example.org#webid",
+    "@type": "@id",
+  },
+  socialKeyword: {
+    "@id": "http://example.org#socialKeyword",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
+    "@isCollection": true,
+  },
+  resourcesWanted: {
+    "@id": "http://example.org#resourcesWanted",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
+    "@isCollection": true,
+  },
+  resourcesOffered: {
+    "@id": "http://example.org#resourcesOffered",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
     "@isCollection": true,
   },
   author: {
@@ -156,14 +176,18 @@ export const shapesContext: LdoJsonldContext = {
     "@type": "@id",
     "@isCollection": true,
   },
+  forumHandle: {
+    "@id": "http://example.org#forumHandle",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
+  },
+  matrixHandle: {
+    "@id": "http://example.org#matrixHandle",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
+  },
   editor: {
     "@id": "http://example.org#editor",
     "@type": "@id",
     "@isCollection": true,
-  },
-  description: {
-    "@id": "http://example.org#description",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
   },
   schedule: {
     "@id": "http://example.org#schedule",
@@ -192,14 +216,6 @@ export const shapesContext: LdoJsonldContext = {
   Production:
     "https://solidproject.solidcommunity.net/catalog/taxonomy#Production",
   Archived: "https://solidproject.solidcommunity.net/catalog/taxonomy#Archived",
-  contactEmail: {
-    "@id": "http://example.org#contactEmail",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
-  },
-  logo: {
-    "@id": "http://example.org#logo",
-    "@type": "@id",
-  },
   serviceEndpoint: {
     "@id": "http://example.org#serviceEndpoint",
     "@type": "@id",
@@ -208,15 +224,6 @@ export const shapesContext: LdoJsonldContext = {
     "@id": "http://example.org#softwareStackIncludes",
     "@type": "@id",
     "@isCollection": true,
-  },
-  socialKeyword: {
-    "@id": "http://example.org#socialKeyword",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
-    "@isCollection": true,
-  },
-  serviceAudience: {
-    "@id": "http://example.org#serviceAudience",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
   },
   ProductivityApp:
     "https://solidproject.solidcommunity.net/catalog/taxonomy#ProductivityApp",
@@ -262,6 +269,10 @@ export const shapesContext: LdoJsonldContext = {
     "@type": "@id",
     "@isCollection": true,
   },
+  serviceAudience: {
+    "@id": "http://example.org#serviceAudience",
+    "@type": "http://www.w3.org/2001/XMLSchema#string",
+  },
   definesConformanceFor: {
     "@id": "http://example.org#definesConformanceFor",
     "@type": "@id",
@@ -273,38 +284,6 @@ export const shapesContext: LdoJsonldContext = {
   },
   prefix: {
     "@id": "http://example.org#prefix",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
-  },
-  Company: "https://solidproject.solidcommunity.net/catalog/taxonomy#Company",
-  GovernmentalOrganization:
-    "https://solidproject.solidcommunity.net/catalog/taxonomy#GovernmentalOrganization",
-  UniversityProject:
-    "https://solidproject.solidcommunity.net/catalog/taxonomy#UniversityProject",
-  OpenSourceProject:
-    "https://solidproject.solidcommunity.net/catalog/taxonomy#OpenSourceProject",
-  FundingOrganization:
-    "https://solidproject.solidcommunity.net/catalog/taxonomy#FundingOrganization",
-  OtherNGO: "https://solidproject.solidcommunity.net/catalog/taxonomy#OtherNGO",
-  webid: {
-    "@id": "http://example.org#webid",
-    "@type": "@id",
-  },
-  resourcesWanted: {
-    "@id": "http://example.org#resourcesWanted",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
-    "@isCollection": true,
-  },
-  resourcesOffered: {
-    "@id": "http://example.org#resourcesOffered",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
-    "@isCollection": true,
-  },
-  forumHandle: {
-    "@id": "http://example.org#forumHandle",
-    "@type": "http://www.w3.org/2001/XMLSchema#string",
-  },
-  matrixHandle: {
-    "@id": "http://example.org#matrixHandle",
     "@type": "http://www.w3.org/2001/XMLSchema#string",
   },
 };
