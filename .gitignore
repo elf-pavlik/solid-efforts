@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-/src/ldo
 
 # local env files
 .env.local
