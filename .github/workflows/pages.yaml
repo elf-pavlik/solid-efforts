@@ -35,9 +35,6 @@ jobs:
         with:
           node-version: 22
       - uses: pnpm/action-setup@v4
-      - name: Build LDO
-        run: pnpm run build:ldo
-        # install after building LDO due to CJS issue
       - name: Install dependencies
         run: pnpm install
       - name: Build
